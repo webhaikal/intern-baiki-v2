@@ -3,17 +3,19 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="relative z-10 flex w-full items-center justify-between bg-base-100 p-4">
-      <Link href="/">
-        <img
-          src="/logo.png"
-          className="h-[30px] pl-2 md:h-[52px]"
-          alt="PackageKahwin.com logo"
-        />
-      </Link>
+    <header className="relative z-10 flex w-full items-center justify-between p-2" style={{backgroundColor: "#F35252"}}>
+      <div className="flex justify-center w-full">
+        <Link href="/">
+          <img
+            src="/logo.png"
+            className="h-[50px] md:h-[62px]"
+            alt="Baiki logo"
+          />
+        </Link>
+      </div>
       <Link
         href="/submit"
-        className="btn-primary btn hidden normal-case md:inline-flex"
+        className="btn-primary btn hidden normal-case md:inline-flex w-0"
       >
         Submit Service
       </Link>

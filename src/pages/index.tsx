@@ -88,7 +88,7 @@ export default function Home({
   }, [data]);
 
   const title =
-    "PakejKahwin.com – Your One-Stop Wedding Services Hub in Malaysia!";
+    "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
   const description =
     "The most comprehensive list for wedding services in Malayisa. Find the best wedding venue, makeup artist, goodies & door gifts, wedding photographer, dress rental, pelamin decorations, invitation card and more!";
 
