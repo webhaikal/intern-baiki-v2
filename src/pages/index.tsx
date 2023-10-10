@@ -96,11 +96,6 @@ export default function Home({
     <div className="flex flex-col">
       <SEOHead title={title} description={description} path="/" />
       <main className="md:mt-4">
-        <h1
-          className={`${sourceSerif4.className} px-4 text-center text-3xl font-semibold md:text-5xl`}
-        >
-          Your dream wedding starts here.
-        </h1>
 
         {/* list controls */}
         <div className="m-4 mt-8 space-y-4 rounded-md bg-white p-4 shadow md:mx-auto md:mt-8 md:flex md:w-full md:max-w-4xl md:items-center md:justify-center md:space-x-2 md:space-y-0 md:bg-transparent md:shadow-none">
@@ -167,45 +162,38 @@ export default function Home({
           </button>
         </div>
 
-        {/* ads slot */}
-        {ads?.length > 0 && (
-          <div className="mx-auto max-w-6xl px-4">
-            <h1 className="text-xs">Sponsored</h1>
-            <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
-              {ads?.map((ad) => (
-                <div
-                  key={ad.id}
-                  className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:border-gray-400"
-                >
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full border border-primary object-cover"
-                      src={ad.imageUrl}
-                      alt={`${ad.name} logo`}
+        {/* desktop view */}
+        <div className="mx-auto mb-16 mt-8 hidden max-w-6xl px-4 md:block">
+          <div className="flex w-full justify-between">
+            <p>
+              <a className="text-[#F35252] font-semibold text-xl">Baiki.</a>
+              <a className="text-xl"> Hub carian untuk baiki dan ganti gajet.</a>
+            </p>
+
+            <div className="flex gap-4">
+              {/* Rounded Square Buttons */}
+              <button className="rounded-lg bg-red-500 p-3 focus:outline-none">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <Image
+                      src="/smartphone.svg" // Provide the correct path to your SVG file
+                      alt="Smartphone Icon"
+                      width={48} // Adjust the width as needed
+                      height={48} // Adjust the height as needed
+                      className="text-white" // You can apply additional styling here
                     />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <a
-                      href={ad.link}
-                      className="focus:outline-none"
-                      target="_blank"
-                    >
-                      <span className="absolute inset-0" aria-hidden="true" />
-                      <p className="text-sm font-medium text-gray-900">
-                        {ad.name}
-                      </p>
-                      <p className="truncate text-sm text-gray-500">
-                        {ad.role}
-                      </p>
-                    </a>
-                  </div>
+                  {/* Button Label */}
+                  <span className="text-white font-semibold">Telefon Pintar</span>
                 </div>
-              ))}
+              </button>
+
+              {/* Add more buttons similarly */}
             </div>
           </div>
-        )}
+        </div>
 
-        {/* desktop view */}
         <div className="mx-auto mb-16 mt-8 hidden max-w-6xl px-4 md:block">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-300">
