@@ -97,71 +97,6 @@ export default function Home({
       <SEOHead title={title} description={description} path="/" />
       <main className="md:mt-4">
 
-        {/* list controls */}
-        <div className="m-4 mt-8 space-y-4 rounded-md bg-white p-4 shadow md:mx-auto md:mt-8 md:flex md:w-full md:max-w-4xl md:items-center md:justify-center md:space-x-2 md:space-y-0 md:bg-transparent md:shadow-none">
-          <input
-            id="search"
-            name="search"
-            type="search"
-            ref={searchRef}
-            onChange={onSearch}
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
-            placeholder="Search"
-          />
-          {/* <select
-            id="service"
-            name="service"
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-            className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6"
-          >
-            <option disabled value="">
-              Service
-            </option>
-            {servicesType.map((type) => (
-              <option key={type.id}>{type.label}</option>
-            ))}
-          </select> */}
-          <select
-            id="state"
-            name="state"
-            value={state}
-            onChange={(e) => {
-              setState(e.target.value);
-              setDistrict("");
-            }}
-            className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6"
-          >
-            <option disabled value="">
-              State
-            </option>
-            {locations.map((location) => (
-              <option key={location.state}>{location.state}</option>
-            ))}
-          </select>
-          <select
-            id="district"
-            name="district"
-            disabled={!state}
-            value={district}
-            onChange={(e) => setDistrict(e.target.value)}
-            className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6"
-          >
-            <option disabled value="">
-              District
-            </option>
-            {locations
-              .find((s) => s.state === state)
-              ?.district.map((d) => <option key={d}>{d}</option>)}
-          </select>
-          <button
-            className="btn btn-ghost btn-sm w-full capitalize md:w-auto"
-            onClick={onReset}
-          >
-            Reset
-          </button>
-        </div>
-
         {/* desktop view */}
         <div className="mx-auto mb-16 mt-8 hidden max-w-6xl px-4 md:block">
           <div className="flex w-full justify-between">
@@ -214,7 +149,7 @@ export default function Home({
                 </div>
               </button>
               
-              <button className="rounded-lg bg-white p-3 focus:outline-none w-32">
+              <button className="rounded-lg bg-white p-3 focus:outline-none w-34">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
