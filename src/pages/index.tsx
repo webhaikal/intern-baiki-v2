@@ -172,24 +172,110 @@ export default function Home({
 
             <div className="flex gap-4">
               {/* Rounded Square Buttons */}
-              <button className="rounded-lg bg-red-500 p-3 focus:outline-none">
+              <button className="rounded-lg bg-red-500 p-3 focus:outline-none w-32">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
-                    <Image
-                      src="/smartphone.svg" // Provide the correct path to your SVG file
-                      alt="Smartphone Icon"
-                      width={48} // Adjust the width as needed
-                      height={48} // Adjust the height as needed
-                      className="text-white" // You can apply additional styling here
-                    />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="white" // Set the fill color to white
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                    >
+                      <path 
+                      d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"
+                      />
+                    </svg>
                   </div>
                   {/* Button Label */}
-                  <span className="text-white font-semibold">Telefon Pintar</span>
+                  <span className="text-white">Telefon Pintar</span>
                 </div>
               </button>
 
-              {/* Add more buttons similarly */}
+              <button className="rounded-lg bg-white p-3 focus:outline-none w-32">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="black" // Set the fill color to black
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                    >
+                      <path 
+                      d="m360-80-54-182q-48-38-77-95t-29-123q0-66 29-123t77-95l54-182h240l54 182q48 38 77 95t29 123q0 66-29 123t-77 95L600-80H360Zm120-200q83 0 141.5-58.5T680-480q0-83-58.5-141.5T480-680q-83 0-141.5 58.5T280-480q0 83 58.5 141.5T480-280Zm-76-470q20-5 38.5-8t37.5-3q19 0 37.5 3t38.5 8l-16-50H420l-16 50Zm16 590h120l16-50q-20 5-38.5 7.5T480-200q-19 0-37.5-2.5T404-210l16 50Zm-16-640h152-152Zm16 640h-16 152-136Z"
+                      />
+                    </svg>
+                  </div>
+                  {/* Button Label */}
+                  <span className="text-black">Jam Pintar</span>
+                </div>
+              </button>
+              
+              <button className="rounded-lg bg-white p-3 focus:outline-none w-32">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="black" // Set the fill color to black
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                    >
+                      <path 
+                      d="M80-120q-17 0-28.5-11.5T40-160q0-17 11.5-28.5T80-200h800q17 0 28.5 11.5T920-160q0 17-11.5 28.5T880-120H80Zm80-120q-33 0-56.5-23.5T80-320v-440q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v440q0 33-23.5 56.5T800-240H160Zm0-80h640v-440H160v440Zm0 0v-440 440Z"
+                      />
+                    </svg>
+                  </div>
+                  {/* Button Label */}
+                  <span className="text-black">Komputer Riba</span>
+                </div>
+              </button>
+
+              <button className="rounded-lg bg-white p-3 focus:outline-none w-32">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="black" // Set the fill color to black
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                    >
+                      <path 
+                      d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"
+                      />
+                    </svg>
+                  </div>
+                  {/* Button Label */}
+                  <span className="text-black">Kamera</span>
+                </div>
+              </button>
+
+              <button className="rounded-lg bg-white p-3 focus:outline-none w-32">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="black" // Set the fill color to black
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                    >
+                      <path 
+                      d="M160-760h320v-40H160v40Zm0 680q-33 0-56.5-23.5T80-160v-640q0-33 23.5-56.5T160-880h320q33 0 56.5 23.5T560-800v154q-23 12-43 27.5T480-584v-96H160v400h257q8 22 18.5 42t24.5 38H160v40h320v-16q15 17 32 31t37 25q-11 18-28.5 29T480-80H160Zm540-160q58 0 99-41t41-99q0-58-41-99t-99-41q-58 0-99 41t-41 99q0 58 41 99t99 41ZM600-80v-104q-54-27-87-79t-33-117q0-65 33-117t87-79v-104h200v104q54 27 87 79t33 117q0 65-33 117t-87 79v104H600ZM160-200v40-40Zm0-560v-40 40Z"
+                      />
+                    </svg>
+                  </div>
+                  {/* Button Label */}
+                  <span className="text-black">Aksesori</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>
