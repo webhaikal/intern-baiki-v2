@@ -310,6 +310,21 @@ export default function Home({
                   </div>
                 </div>
               </div>
+              <div className="snap-start shrink-0">
+                <button className="rounded-lg bg-white p-3 focus:outline-none h-full">
+                  <div className="flex flex-col items-center p-2 mb-2">
+                    <div className="relative mt-6">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        height="24" 
+                        viewBox="0 -960 960 960" 
+                        width="24">
+                        <path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
