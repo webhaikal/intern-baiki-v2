@@ -100,7 +100,7 @@ export default function Home({
         {/* desktop view */}
         <div className="mx-auto mb-16 mt-8 hidden max-w-6xl px-4 md:block">
           <div className="flex w-full justify-between">
-            <p>
+            <p className="mt-10">
               <a className="text-[#F35252] font-semibold text-xl">Baiki.</a>
               <a className="text-xl"> Hub carian untuk baiki dan ganti gajet.</a>
             </p>
@@ -216,6 +216,100 @@ export default function Home({
                   <span className="text-black group-hover:text-white">Aksesori</span>
                 </div>
               </button>
+            </div>
+          </div>
+          <div className="flex w-full mt-4">
+            <p>
+              <a className="font-semibold">Semua kedai. </a>
+              <a>Pilih kedai berdekatan anda.</a>
+            </p>
+          </div>
+          <div className="relative mt-8">
+            <div className="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto">
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
+              <div className="snap-start shrink-0">
+                <div className="rounded-lg bg-white p-3 focus:outline-none">
+                  <div className="flex flex-col items-center">
+                    <div className="rounded-full p-2 mb-2">
+                      {/* Image */}
+                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                    </div>
+                    {/* Button Label */}
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
