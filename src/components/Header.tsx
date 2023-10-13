@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { Menu } from "@headlessui/react";
 
 function Header() {
   return (
@@ -32,9 +33,10 @@ function Header() {
         </button>
       </div>
 
+    <Menu>
       <div className="hidden md:inline-flex md:space-x-4">
         {/* Profile icon without a background */}
-        <button className="btn-normal-case">
+        <Menu.Button>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-user h-6 w-8 fill-white stroke-primary"
@@ -47,8 +49,21 @@ function Header() {
             <circle cx="12" cy="7" r="4" />
             <path d="M6 21v-1a3.5 3.5 0 0 1 3 -3h6a3.5 3.5 0 0 1 3 3v1" />
           </svg>
-        </button>
+          </Menu.Button>
+          <Menu.Items>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  className={`${active && 'bg-blue-500'}`}
+                  href="/account-login"
+                >
+                  Log Masuk
+                </a>
+              )}
+            </Menu.Item>
+          </Menu.Items>
       </div>
+    </Menu>
 
       <div className="drawer drawer-end m-0 w-auto p-0 md:hidden">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
