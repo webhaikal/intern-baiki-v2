@@ -227,6 +227,21 @@ export default function Home({
           <div className="relative mt-8">
             <div className="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto">
               <div className="snap-start shrink-0">
+                <button className="rounded-lg bg-white p-3 focus:outline-none h-full">
+                  <div className="flex flex-col items-center p-2 mb-2">
+                    <div className="relative mt-6">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        height="24" 
+                        viewBox="0 -960 960 960" 
+                        width="24">
+                        <path d="M400-240 160-480l240-240 56 58-142 142h486v80H314l142 142-56 58Z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+              </div>
+              <div className="snap-start shrink-0">
                 <div className="rounded-lg bg-white p-3 focus:outline-none">
                   <div className="flex flex-col items-center">
                     <div className="rounded-full p-2 mb-2">
