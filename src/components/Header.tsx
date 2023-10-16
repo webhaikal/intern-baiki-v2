@@ -4,7 +4,7 @@ import { Menu } from "@headlessui/react";
 
 function Header() {
   return (
-    <header className="relative z-10 flex w-full items-center justify-between p-2" style={{ backgroundColor: "#F35252" }}>
+    <header className="relative z-10 flex items-center justify-between p-2" style={{ backgroundColor: "#F35252" }}>
       <div className="flex justify-center w-full">
         <Link href="/">
           <img
