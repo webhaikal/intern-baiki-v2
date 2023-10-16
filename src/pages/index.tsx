@@ -90,7 +90,7 @@ export default function Home({
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
   const description =
-    "The most comprehensive list for wedding services in Malayisa. Find the best wedding venue, makeup artist, goodies & door gifts, wedding photographer, dress rental, pelamin decorations, invitation card and more!";
+    "The most comprehensive list for repair services in Malaysia. Find the best wedding venue, makeup artist, goodies & door gifts, wedding photographer, dress rental, pelamin decorations, invitation card and more!";
 
   return (
     <div className="flex flex-col">
@@ -107,29 +107,7 @@ export default function Home({
 
             <div className="flex gap-4">
               {/* Rounded Square Buttons */}
-              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group">
-                <div className="flex flex-col items-center">
-                  <div className="rounded-full p-2 mb-2 group-hover:bg-red-500">
-                    {/* Icon */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="48" // Adjust the width as needed
-                      height="48" // Adjust the height as needed
-                      fill="black" // Set the fill color to black
-                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
-                      className="group-hover:fill-white"
-                    >
-                      <path 
-                      d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"
-                      />
-                    </svg>
-                  </div>
-                  {/* Button Label */}
-                  <span className="text-black group-hover:text-white">Telefon Pintar</span>
-                </div>
-              </button>
-
-              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group">
+              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group active:bg-red-600">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
@@ -142,7 +120,29 @@ export default function Home({
                       className="group-hover:fill-white"
                     >
                       <path 
-                      d="m360-80-54-182q-48-38-77-95t-29-123q0-66 29-123t77-95l54-182h240l54 182q48 38 77 95t29 123q0 66-29 123t-77 95L600-80H360Zm120-200q83 0 141.5-58.5T680-480q0-83-58.5-141.5T480-680q-83 0-141.5 58.5T280-480q0 83 58.5 141.5T480-280Zm-76-470q20-5 38.5-8t37.5-3q19 0 37.5 3t38.5 8l-16-50H420l-16 50Zm16 590h120l16-50q-20 5-38.5 7.5T480-200q-19 0-37.5-2.5T404-210l16 50Zm-16-640h152-152Zm16 640h-16 152-136Z"
+                        d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"
+                      />
+                    </svg>
+                  </div>
+                  {/* Button Label */}
+                  <span className="text-black group-hover:text-white">Telefon Pintar</span>
+                </div>
+              </button>
+
+              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group active:bg-red-600">
+                <div className="flex flex-col items-center">
+                  <div className="rounded-full p-2 mb-2">
+                    {/* Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48" // Adjust the width as needed
+                      height="48" // Adjust the height as needed
+                      fill="black" // Set the fill color to black
+                      viewBox="0 -960 960 960" // Adjust the viewBox as needed
+                      className="group-hover:fill-white"
+                    >
+                      <path 
+                        d="m360-80-54-182q-48-38-77-95t-29-123q0-66 29-123t77-95l54-182h240l54 182q48 38 77 95t29 123q0 66-29 123t-77 95L600-80H360Zm120-200q83 0 141.5-58.5T680-480q0-83-58.5-141.5T480-680q-83 0-141.5 58.5T280-480q0 83 58.5 141.5T480-280Zm-76-470q20-5 38.5-8t37.5-3q19 0 37.5 3t38.5 8l-16-50H420l-16 50Zm16 590h120l16-50q-20 5-38.5 7.5T480-200q-19 0-37.5-2.5T404-210l16 50Zm-16-640h152-152Zm16 640h-16 152-136Z"
                       />
                     </svg>
                   </div>
@@ -151,7 +151,7 @@ export default function Home({
                 </div>
               </button>
               
-              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-34 group">
+              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-34 group active:bg-red-600">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
@@ -173,7 +173,7 @@ export default function Home({
                 </div>
               </button>
 
-              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group">
+              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group active:bg-red-600">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
@@ -195,7 +195,7 @@ export default function Home({
                 </div>
               </button>
 
-              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group">
+              <button className="rounded-lg bg-white hover:bg-red-500 p-3 focus:outline-none w-32 group active:bg-red-600">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full p-2 mb-2">
                     {/* Icon */}
@@ -249,7 +249,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -261,7 +261,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -285,7 +285,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -297,7 +297,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -309,7 +309,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -321,7 +321,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 text-white px-4 py-2">Profil</button>
+                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
                   </div>
                 </div>
               </div>
@@ -342,6 +342,19 @@ export default function Home({
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex flex-col">
+          <div className="mx-auto mb-16 mt-8 max-w-screen-lg px-4 md:block">
+          </div>
+          <div className="flex-grow">
+          </div>
+          <footer className="relative z-10 flex w-full items-center h-12" style={{ backgroundColor: "#F35252" }}>
+            <div className="flex justify-center w-full">
+              <div className="font-semibold text-white">
+                <p>Oxsgn 2023</p>
+              </div>
+            </div>
+          </footer>
         </div>
 
         {/* mobile view */}
