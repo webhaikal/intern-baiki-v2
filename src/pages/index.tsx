@@ -141,12 +141,12 @@ export default function Home({
               <div className="px-0">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
+                    <Link
                       className={`${active && 'bg-red-500 text-white block px-4 py-2' || 'block px-4 py-2'}`}
                       href="/account-login"
                     >
                       Log Masuk
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
                 <Menu.Item>
