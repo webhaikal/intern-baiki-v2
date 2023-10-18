@@ -142,7 +142,7 @@ export default function Home({
                 <Menu.Item>
                   {({ active }) => (
                     <Link
-                      className={`${active && 'bg-red-500 text-white block px-4 py-2' || 'block px-4 py-2'}`}
+                      className={`${active && 'bg-red-500 text-white block rounded-md px-4 py-2' || 'block rounded-md px-4 py-2'}`}
                       href="/account-login"
                     >
                       Log Masuk
@@ -152,7 +152,7 @@ export default function Home({
                 <Menu.Item>
                   {({ active }) => (
                     <a
-                      className={`${active && 'bg-red-500 text-white block px-4 py-2' || 'block px-4 py-2'}`}
+                      className={`${active && 'bg-red-500 text-white block rounded-md px-4 py-2' || 'block rounded-md px-4 py-2'}`}
                       href="/account-signup"
                     >
                       Daftar
@@ -366,7 +366,7 @@ export default function Home({
                         <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                     </div>
                     {/* Button Label */}
-                    <button className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2">Profil</button>
+                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
                   </div>
                 </div>
               </div>
