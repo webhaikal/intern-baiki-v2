@@ -206,7 +206,7 @@ export default function Home({
       </header>
 
       <SEOHead title={title} description={description} path="/" />
-      <main className="md:mt-4">
+      <main className="md:mt-4" style={{ backgroundColor: "#F5F5F5" }}>
 
         {/* desktop view */}
         <div className="mx-auto mb-16 mt-8 hidden max-w-6xl px-4 md:block">
