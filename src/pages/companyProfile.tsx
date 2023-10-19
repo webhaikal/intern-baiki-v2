@@ -282,7 +282,7 @@ export default function CompanyProfile({
               Lihat ulasan
             </a>
           </div>
-          <div className="ml-10 rounded-md mb-16 mt-2 hidden max-w-lg px-4 md:block bg-gray-200">
+          <div className="ml-10 rounded-md mb-16 mt-2 hidden max-w-md px-4 md:block bg-gray-200">
             <div className="flex w-full focus:outline-none">
               <div className="flex mt-4">
                 <svg 
@@ -298,6 +298,11 @@ export default function CompanyProfile({
                   @Username
                 </p>
               </div>
+            </div>
+            <div className="flex w-full focus:outline-none mt-2 text-gray-500">
+              <p className="">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. Purus semper eget duis at tellus at urna.
+              </p>
             </div>
           </div>
         </div>
