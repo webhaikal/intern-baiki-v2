@@ -1,7 +1,7 @@
 function Footer() {
     return(
         <div className="flex flex-col">
-          <div className="mx-auto mb-16 mt-8 max-w-screen-lg px-4 md:block">
+          <div className="mx-auto mb-auto mt-auto max-w-screen-lg px-4 md:block">
           </div>
           <div className="flex-grow">
           </div>
