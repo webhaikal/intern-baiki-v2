@@ -209,7 +209,7 @@ export default function CompanyProfile({
       <main className="md:mt-4" style={{ backgroundColor: "#F5F5F5" }}>
 
         {/* desktop view */}
-        <div className="mx-auto mb-16 mt-2 hidden max-w-6xl px-4 md:block bg-white py-1 flex flex-row">
+        <div className="mx-auto mb-16 mt-2 hidden max-w-6xl px-4 md:flex bg-white py-1 flex-row">
           <div className="flex flex-col">
             <div className="flex w-full focus:outline-none">
               <div className="flex px-10 mt-4">
