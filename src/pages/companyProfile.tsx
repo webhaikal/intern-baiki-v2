@@ -209,7 +209,7 @@ export default function CompanyProfile({
       <main className="md:mt-4" style={{ backgroundColor: "#F5F5F5" }}>
 
         {/* desktop view */}
-        <div className="mx-auto mb-16 mt-2 hidden max-w-6xl px-4 md:flex bg-white py-1 flex-row">
+        <div className="mx-auto mb-16 mt-2 hidden max-w-4xl px-4 md:flex bg-white py-1 flex-row">
           <div className="flex flex-col">
             <div className="flex w-full focus:outline-none">
               <div className="flex px-10 mt-4">
@@ -308,8 +308,10 @@ export default function CompanyProfile({
             </div>
           </div>
           <div className="flex flex-col">
-            {/* Pictures here */}
-            <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+            <div className="flex mt-4 px-10">
+              {/* Pictures here */}
+              <img className="rounded-md" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+            </div>
           </div>
         </div>
         
