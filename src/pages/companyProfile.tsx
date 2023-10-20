@@ -341,7 +341,7 @@ export default function CompanyProfile({
         </div>
         
         {/* mobile view */}
-        <div className="mx-auto mb-16 mt-2 md:hidden max-w-4xl px-4 bg-white py-1 flex-row">
+        <div className="mx-auto mb-16 mt-2 md:hidden px-0 bg-white py-1 flex-row">
           <div className="flex flex-col">
             <div className="flex w-full focus:outline-none">
               <div className="flex px-8 mt-4">
@@ -415,13 +415,13 @@ export default function CompanyProfile({
                 {/* Pictures here */}
                 <img className="rounded-md" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
               </div>
-          </div>
+            </div>
             <div className="flex w-68 px-8 mt-6">
               <a className="font-semibold">
                 Lihat ulasan
               </a>
             </div>
-            <div className="ml-8 rounded-md mb-16 mt-2 w-80 px-4 md:hidden bg-gray-200">
+            <div className="rounded-md mb-16 mt-2 w-full px-10 md:hidden bg-gray-200">
               <div className="flex w-full focus:outline-none">
                 <div className="flex mt-4">
                   <svg 
