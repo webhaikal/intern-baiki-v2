@@ -421,7 +421,7 @@ export default function CompanyProfile({
                 Lihat ulasan
               </a>
             </div>
-            <div className="rounded-md mb-16 mt-2 w-full px-10 md:hidden bg-gray-200">
+            <div className="rounded-md mb-16 mt-2 w-fit px-4 mx-8 md:hidden bg-gray-200">
               <div className="flex w-full focus:outline-none">
                 <div className="flex mt-4">
                   <svg 
