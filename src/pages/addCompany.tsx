@@ -9,7 +9,7 @@ import Link from "next/link";
 import queryString from "query-string";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import useSWR, { Fetcher } from "swr";
-import { addData } from "../../firebase";
+import { addData } from "../../backend/firebase";
 import { useRouter } from "next/router";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
