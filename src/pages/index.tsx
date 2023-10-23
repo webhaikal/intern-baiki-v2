@@ -109,6 +109,14 @@ export default function Home({
         </div>
 
         <div className="hidden md:inline-flex md:space-x-4">
+          <button className="btn-normal-case text-white">
+            <Link href="/addCompany">
+              Add Company
+            </Link>
+          </button>
+        </div>
+
+        <div className="hidden md:inline-flex md:space-x-4">
           {/* Add the Search Icon button with no background */}
           <button className="btn-normal-case">
           <svg 

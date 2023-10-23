@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, addDoc} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,4 +19,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore();
+
+// Reference to a Firestore collection
+const dataCollection = collection(db, "users"); // Replace with the actual collection name
+
+// Add a new document with the data
+export const addData = async (dataToSubmit: { name: string; state: string; district: string; time: string; contact: string; dribbleUrl: string; facebookUrl: string; instagramUrl: string; twitterUrl: string; picture1: string; picture2: string; picture3: string; picture4: string; }) => {
+  try {
+    const docRef = await addDoc(dataCollection, dataToSubmit);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+};
