@@ -94,25 +94,27 @@ export default function Home({
   const router = useRouter();
 
   const handleSubmit = async () => {
-    const name = (document.getElementById("name") as HTMLInputElement)?.value;
-    const state = (document.getElementById("state") as HTMLInputElement)?.value;
-    const district = (document.getElementById("district") as HTMLInputElement)?.value;
-    const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value;
-    const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value;
-    const contact = (document.getElementById("contact") as HTMLInputElement)?.value;
-    const dribbleUrl = (document.getElementById("dribbleUrl") as HTMLInputElement)?.value;
-    const facebookUrl = (document.getElementById("FacebookUrl") as HTMLInputElement)?.value;
-    const instagramUrl = (document.getElementById("instagramUrl") as HTMLInputElement)?.value;
-    const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value;
-    const picture1 = (document.getElementById("picture1") as HTMLInputElement).value;
-    const picture2 = (document.getElementById("picture2") as HTMLInputElement).value;
-    const picture3 = (document.getElementById("picture3") as HTMLInputElement).value;
-    const picture4 = (document.getElementById("picture4") as HTMLInputElement).value;
+    const name = (document.getElementById("name") as HTMLInputElement)?.value || (document.getElementById("mobile_name") as HTMLInputElement)?.value;
+    const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
+    const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
+    const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
+    const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
+    const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
+    const contact = (document.getElementById("contact") as HTMLInputElement)?.value || (document.getElementById("mobile_contact") as HTMLInputElement)?.value;
+    const dribbleUrl = (document.getElementById("dribbleUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_dribbleUrl") as HTMLInputElement)?.value;
+    const facebookUrl = (document.getElementById("FacebookUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_FacebookUrl") as HTMLInputElement)?.value;
+    const instagramUrl = (document.getElementById("instagramUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_instagramUrl") as HTMLInputElement)?.value;
+    const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
+    const picture1 = (document.getElementById("picture1") as HTMLInputElement).value || (document.getElementById("mobile_picture1") as HTMLInputElement).value;
+    const picture2 = (document.getElementById("picture2") as HTMLInputElement).value || (document.getElementById("mobile_picture2") as HTMLInputElement).value;
+    const picture3 = (document.getElementById("picture3") as HTMLInputElement).value || (document.getElementById("mobile_picture3") as HTMLInputElement).value;
+    const picture4 = (document.getElementById("picture4") as HTMLInputElement).value || (document.getElementById("mobile_picture4") as HTMLInputElement).value;
   
     const dataToSubmit = {
       name,
       state,
       district,
+      description,
       time: `${timeStart} - ${timeEnd}`,
       contact,
       dribbleUrl,
@@ -129,7 +131,7 @@ export default function Home({
     addData(dataToSubmit);
 
     router.push("/");
-  };  
+  };
 
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
@@ -293,6 +295,11 @@ export default function Home({
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
+            <label htmlFor="description">Description: </label>
+            <input type="text" name="description" id="description" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
             <label htmlFor="time">Time: </label>
             <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2">
             </input>
@@ -354,7 +361,84 @@ export default function Home({
 
         {/* mobile view */}
         <div className="mx-4 mb-16 mt-6 flex flex-col space-y-2 md:hidden">
-          
+          <div className="flex w-full items-center">
+            <label htmlFor="name">Name: </label>
+            <input type="text" name="name" id="mobile_name" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="state">State: </label>
+            <input type="text" name="state" id="mobile_state" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="district">District: </label>
+            <input type="text" name="district" id="mobile_district" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="description">Description: </label>
+            <input type="text" name="description" id="mobile_description" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="time">Time: </label>
+            <input type="time" name="time" id="mobile_timeStart" className="rounded-xl w-full ml-2">
+            </input>
+            <input type="time" name="time" id="mobile_timeEnd" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="contact">Contact: </label>
+            <input type="tel" name="contact" id="mobile_contact" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="dribbleUrl">Dribble: </label>
+            <input type="text" name="dribbleUrl" id="mobile_dribbleUrl" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="facebookUrl">Facebook: </label>
+            <input type="text" name="FacebookUrl" id="mobile_FacebookUrl" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="instagramUrl">Instagram: </label>
+            <input type="text" name="instagramUrl" id="mobile_instagramUrl" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="twitterUrl">Twitter: </label>
+            <input type="text" name="twitterUrl" id="mobile_twitterUrl" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="picture1">Picture 1: </label>
+            <input type="file" name="picture1" id="mobile_picture1" className="ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="picture2">Picture 2: </label>
+            <input type="file" name="picture2" id="mobile_picture2" className="ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="picture3">Picture 3: </label>
+            <input type="file" name="picture3" id="mobile_picture3" className="ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="picture4">Picture 4: </label>
+            <input type="file" name="picture4" id="mobile_picture4" className="ml-2">
+            </input>
+          </div>
+          <div className="flex md:inline-flex md:space-x-4 mt-2">
+            <button className="inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-red focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" 
+            onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
         </div>
       </main>
     </div>
