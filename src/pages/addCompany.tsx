@@ -11,6 +11,9 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import useSWR, { Fetcher } from "swr";
 import { addData } from "../../backend/firebase";
 import { useRouter } from "next/router";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
@@ -92,6 +95,7 @@ export default function Home({
   }, [data]);
 
   const router = useRouter();
+  const storage = getStorage();
 
   const handleSubmit = async () => {
     const name = (document.getElementById("name") as HTMLInputElement)?.value || (document.getElementById("mobile_name") as HTMLInputElement)?.value;
@@ -105,11 +109,46 @@ export default function Home({
     const facebookUrl = (document.getElementById("FacebookUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_FacebookUrl") as HTMLInputElement)?.value;
     const instagramUrl = (document.getElementById("instagramUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_instagramUrl") as HTMLInputElement)?.value;
     const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
-    const picture1 = (document.getElementById("picture1") as HTMLInputElement).value || (document.getElementById("mobile_picture1") as HTMLInputElement).value;
-    const picture2 = (document.getElementById("picture2") as HTMLInputElement).value || (document.getElementById("mobile_picture2") as HTMLInputElement).value;
-    const picture3 = (document.getElementById("picture3") as HTMLInputElement).value || (document.getElementById("mobile_picture3") as HTMLInputElement).value;
-    const picture4 = (document.getElementById("picture4") as HTMLInputElement).value || (document.getElementById("mobile_picture4") as HTMLInputElement).value;
   
+    // Initialize variables for picture URLs
+    let picture1Url = "";
+    let picture2Url = "";
+    let picture3Url = "";
+    let picture4Url = "";
+    
+     // Function to upload picture to Firebase Storage and get its URL
+    const uploadPictureAndGetUrl = async (inputId: string, storagePath: string): Promise<string> => {
+      const input = document.getElementById(inputId) as HTMLInputElement | null;
+
+      if (input) {
+        const file = input.files?.[0];
+
+        if (file) {
+          const pictureRef = ref(storage, storagePath);
+
+          try {
+            await uploadBytes(pictureRef, file);
+            return await getDownloadURL(pictureRef);
+          } catch (error) {
+            console.error("Error uploading picture:", error);
+            return "";
+          }
+        } else {
+          console.error(`No file selected for ${inputId}`);
+        }
+      } else {
+        console.error(`Element with ID '${inputId}' not found in the DOM`);
+      }
+
+      return "";
+    };
+
+    // Upload pictures and get their URLs
+    picture1Url = await uploadPictureAndGetUrl("picture1", `images/${name}/picture1.jpg`);
+    picture2Url = await uploadPictureAndGetUrl("picture2", `images/${name}/picture2.jpg`);
+    picture3Url = await uploadPictureAndGetUrl("picture3", `images/${name}/picture3.jpg`);
+    picture4Url = await uploadPictureAndGetUrl("picture4", `images/${name}/picture4.jpg`);
+    
     const dataToSubmit = {
       name,
       state,
@@ -121,10 +160,10 @@ export default function Home({
       facebookUrl,
       instagramUrl,
       twitterUrl,
-      picture1,
-      picture2,
-      picture3,
-      picture4,
+      picture1: picture1Url,
+      picture2: picture2Url,
+      picture3: picture3Url,
+      picture4: picture4Url,
     };
   
     // Call the function to add the data to Firebase
@@ -333,22 +372,22 @@ export default function Home({
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture1">Picture 1: </label>
-            <input type="file" name="picture1" id="picture1" className="ml-2">
+            <input type="file" name="picture1" id="picture1" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture2">Picture 2: </label>
-            <input type="file" name="picture2" id="picture2" className="ml-2">
+            <input type="file" name="picture2" id="picture2" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture3">Picture 3: </label>
-            <input type="file" name="picture3" id="picture3" className="ml-2">
+            <input type="file" name="picture3" id="picture3" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture4">Picture 4: </label>
-            <input type="file" name="picture4" id="picture4" className="ml-2">
+            <input type="file" name="picture4" id="picture4" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex md:inline-flex md:space-x-4 mt-2">
@@ -415,22 +454,22 @@ export default function Home({
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture1">Picture 1: </label>
-            <input type="file" name="picture1" id="mobile_picture1" className="ml-2">
+            <input type="file" name="picture1" id="mobile_picture1" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture2">Picture 2: </label>
-            <input type="file" name="picture2" id="mobile_picture2" className="ml-2">
+            <input type="file" name="picture2" id="mobile_picture2" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture3">Picture 3: </label>
-            <input type="file" name="picture3" id="mobile_picture3" className="ml-2">
+            <input type="file" name="picture3" id="mobile_picture3" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="picture4">Picture 4: </label>
-            <input type="file" name="picture4" id="mobile_picture4" className="ml-2">
+            <input type="file" name="picture4" id="mobile_picture4" className="ml-2" accept="image/*">
             </input>
           </div>
           <div className="flex md:inline-flex md:space-x-4 mt-2">
