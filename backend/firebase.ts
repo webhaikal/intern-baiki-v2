@@ -25,7 +25,7 @@ const db = getFirestore();
 const dataCollection = collection(db, "users"); // Replace with the actual collection name
 
 // Add a new document with the data
-export const addData = async (dataToSubmit: { name: string; state: string; district: string; time: string; contact: string; dribbleUrl: string; facebookUrl: string; instagramUrl: string; twitterUrl: string; picture1: string; picture2: string; picture3: string; picture4: string; }) => {
+export const addData = async (dataToSubmit: { name: string; state: string; district: string; description: string; time: string; contact: string; dribbleUrl: string; facebookUrl: string; instagramUrl: string; twitterUrl: string; picture1: string; picture2: string; picture3: string; picture4: string; }) => {
   try {
     const docRef = await addDoc(dataCollection, dataToSubmit);
     console.log("Document written with ID: ", docRef.id);

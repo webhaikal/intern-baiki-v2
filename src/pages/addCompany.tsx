@@ -18,7 +18,6 @@ export default function Home() {
     const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
     const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
     const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
-    const type = (document.getElementById("type") as HTMLInputElement)?.value || (document.getElementById("mobile_type") as HTMLInputElement)?.value; 
     const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
     const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
     const contact = (document.getElementById("contact") as HTMLInputElement)?.value || (document.getElementById("mobile_contact") as HTMLInputElement)?.value;
