@@ -1,99 +1,15 @@
 import SEOHead from "@/components/SEOHead";
-import { locations, servicesType } from "@/constants";
-import { AdvetisementResponse, ServiceResponse } from "@/types";
 import { Menu } from "@headlessui/react";
-import { GetStaticProps, InferGetServerSidePropsType } from "next";
 import { Source_Serif_4 } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
-import queryString from "query-string";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import useSWR, { Fetcher } from "swr";
 import { addData } from "../../backend/firebase";
 import { useRouter } from "next/router";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
-const fetcher: Fetcher<ServiceResponse[], string> = (url: string) =>
-  fetch(url).then((r) => r.json());
-
-export const getStaticProps: GetStaticProps<{
-  initialServices: ServiceResponse[];
-  ads: AdvetisementResponse[];
-}> = async () => {
-  const serviceRes = await fetch("https://api.pakejkahwin.com/services");
-  const initialServices: ServiceResponse[] = await serviceRes.json();
-
-  const advertisementRes = await fetch("https://api.pakejkahwin.com/ads");
-  const ads: AdvetisementResponse[] = await advertisementRes.json();
-  return {
-    props: {
-      initialServices: initialServices.reverse(),
-      ads,
-    },
-    // revalidate every 1 minute
-    revalidate: 60 * 1,
-  };
-};
-
-export default function Home({
-  initialServices,
-  ads,
-}: InferGetServerSidePropsType<typeof getStaticProps>) {
-  const searchRef = useRef<HTMLInputElement>(null);
-
-  const [services, setServices] = useState(initialServices);
-  const [search, setSearch] = useState("");
-  const [service, setService] = useState("");
-  const [state, setState] = useState("");
-  const [district, setDistrict] = useState("");
-
-  const query = queryString.stringify(
-    {
-      q: search,
-      "location.state": state,
-      "location.district": district,
-      typeId: servicesType.find((s) => s.label === service)?.id,
-    },
-    { skipEmptyString: true, skipNull: true },
-  );
-
-  const { data } = useSWR(`/api/services?${query}`, fetcher);
-
-  let filterTimeout: NodeJS.Timeout;
-  const onSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(filterTimeout);
-
-    filterTimeout = setTimeout(() => {
-      setSearch(e.target.value);
-    }, 500);
-  };
-
-  const onReset = () => {
-    // clear uncontrolled search input
-    if (searchRef.current) {
-      searchRef.current.value = "";
-    }
-
-    setServices(initialServices);
-    setSearch("");
-    setService("");
-    setState("");
-    setDistrict("");
-  };
-
-  useEffect(() => {
-    if (data) {
-      const dataCopy = [...data];
-      setServices(dataCopy.reverse());
-    } else {
-      setServices(initialServices);
-    }
-  }, [data]);
-
+export default function Home() {
   const router = useRouter();
   const storage = getStorage();
 

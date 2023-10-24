@@ -6,7 +6,6 @@ import Link from "next/link";
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
 export default function Home() {
-
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
   const description =
