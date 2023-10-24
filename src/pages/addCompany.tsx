@@ -18,6 +18,7 @@ export default function Home() {
     const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
     const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
     const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
+    const type = (document.getElementById("type") as HTMLInputElement)?.value || (document.getElementById("mobile_type") as HTMLInputElement)?.value; 
     const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
     const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
     const contact = (document.getElementById("contact") as HTMLInputElement)?.value || (document.getElementById("mobile_contact") as HTMLInputElement)?.value;
@@ -64,12 +65,16 @@ export default function Home() {
     picture2Url = await uploadPictureAndGetUrl("picture2", `images/${name}/picture2.jpg`);
     picture3Url = await uploadPictureAndGetUrl("picture3", `images/${name}/picture3.jpg`);
     picture4Url = await uploadPictureAndGetUrl("picture4", `images/${name}/picture4.jpg`);
+
+    // Handle checkboxes and create an array of selected types
+    const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map((checkbox) => (checkbox as HTMLInputElement).value);
     
     const dataToSubmit = {
       name,
       state,
       district,
       description,
+      type: selectedTypes, // Store selected types as an array
       time: `${timeStart} - ${timeEnd}`,
       contact,
       dribbleUrl,
@@ -255,6 +260,19 @@ export default function Home() {
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
+            <label htmlFor="type">Type: </label>
+            <input type="checkbox" name="type" value="smartphone" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Telefon Pintar</label>
+            <input type="checkbox" name="type" value="smartwatch" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Jam Pintar</label>
+            <input type="checkbox" name="type" value="laptop" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Komputer Riba</label>
+            <input type="checkbox" name="type" value="camera" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Kamera</label>
+            <input type="checkbox" name="type" value="accessory" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Aksesori</label>
+          </div>
+          <div className="flex w-full items-center mt-2">
             <label htmlFor="time">Time: </label>
             <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2">
             </input>
@@ -335,6 +353,23 @@ export default function Home() {
             <label htmlFor="description">Description: </label>
             <input type="text" name="description" id="mobile_description" className="rounded-xl w-full ml-2">
             </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="type">Type: </label>
+          </div>
+          <div className="flex w-full items-center mt-2 justify-center">
+            <input type="checkbox" name="type" value="smartphone" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Telefon Pintar</label>
+            <input type="checkbox" name="type" value="smartwatch" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Jam Pintar</label>
+            <input type="checkbox" name="type" value="laptop" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Komputer Riba</label>
+          </div>
+          <div className="flex w-full items-center mt-2 justify-center">
+            <input type="checkbox" name="type" value="camera" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Kamera</label>
+            <input type="checkbox" name="type" value="accessory" className="ml-2"></input>
+            <label htmlFor="type" className="ml-2">Aksesori</label>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="time">Time: </label>
