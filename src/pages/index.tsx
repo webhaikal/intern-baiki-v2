@@ -2,10 +2,25 @@ import SEOHead from "@/components/SEOHead";
 import { Menu } from "@headlessui/react";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
+import { useEffect, useState } from 'react';
+import { fetchUserData } from "../../backend/firebase";
+import { DocumentData } from "firebase/firestore";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
 export default function Home() {
+  const [userData, setUserData] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    // Fetch user data when the component mounts
+    const fetchData = async () => {
+      const users = await fetchUserData();
+      setUserData(users);
+    };
+
+    fetchData();
+  }, []);
+
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
   const description =
@@ -303,129 +318,25 @@ export default function Home() {
                 </button>
               </div>
               <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                  <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto">
+                  {userData.map((user, index) => (
+                    <div className="rounded-lg bg-white p-3 focus:outline-none">
+                      <p className="text-center font-semibold">
+                        {user.name}
+                      </p>
+                      <p className="text-center">
+                        {user.district}, {user.state}
+                      </p>
+                      <div className="flex flex-col items-center">
+                        <div className="rounded-full p-2 mb-2">
+                          {/* Image */}
+                            <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                        </div>
+                        {/* Button Label */}
+                        <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
+                      </div>
                     </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
+                  ))}
                 </div>
               </div>
               <div className="snap-start shrink-0">
@@ -589,129 +500,25 @@ export default function Home() {
                 </button>
               </div>
               <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                  <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto">
+                  {userData.map((user, index) => (
+                    <div className="rounded-lg bg-white p-3 focus:outline-none">
+                      <p className="text-center font-semibold">
+                        {user.name}
+                      </p>
+                      <p className="text-center">
+                        {user.district}, {user.state}
+                      </p>
+                      <div className="flex flex-col items-center">
+                        <div className="rounded-full p-2 mb-2">
+                          {/* Image */}
+                            <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                        </div>
+                        {/* Button Label */}
+                        <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
+                      </div>
                     </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="snap-start shrink-0">
-                <div className="rounded-lg bg-white p-3 focus:outline-none">
-                <p className="text-center font-semibold">
-                    iFIXIT
-                  </p>
-                  <p className="text-center">
-                    Bukit Tinggi, Pahang
-                  </p>
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full p-2 mb-2">
-                      {/* Image */}
-                        <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                    </div>
-                    {/* Button Label */}
-                    <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
-                  </div>
+                  ))}
                 </div>
               </div>
               <div className="snap-start shrink-0">

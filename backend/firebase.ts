@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc} from "firebase/firestore";
+import { getFirestore, collection, addDoc, DocumentData} from "firebase/firestore";
+import { getDocs, query, where, orderBy } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,5 +32,26 @@ export const addData = async (dataToSubmit: { name: string; state: string; distr
     console.log("Document written with ID: ", docRef.id);
   } catch (error) {
     console.error("Error adding document: ", error);
+  }
+};
+
+// Function to fetch user data from Firestore
+export const fetchUserData = async () => {
+  try {
+    const q = query(collection(db, 'users'));
+
+    const querySnapshot = await getDocs(q);
+
+    const userData: DocumentData[] = [];
+    querySnapshot.forEach((doc) => {
+      // Get data for each user
+      const user = doc.data();
+      userData.push(user);
+    });
+
+    return userData;
+  } catch (error) {
+    console.error('Error fetching user data: ', error);
+    return [];
   }
 };
