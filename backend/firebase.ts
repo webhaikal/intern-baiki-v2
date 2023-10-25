@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc, DocumentData} from "firebase/firestore";
+import { getFirestore, collection, addDoc, DocumentData, doc, getDoc} from "firebase/firestore";
 import { getDocs, query, where, orderBy } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -53,5 +53,24 @@ export const fetchCompanyData = async () => {
   } catch (error) {
     console.error('Error fetching companies data: ', error);
     return [];
+  }
+};
+
+// Function to fetch a specific company's data by companyId
+export const fetchCompanyDataById = async (companyId: string) => {
+  try {
+    const companyDocRef = doc(db, 'companies', companyId);
+    const companyDoc = await getDoc(companyDocRef);
+    
+    if (companyDoc.exists()) {
+      const companyData = companyDoc.data();
+      return companyData;
+    } else {
+      console.error('Company document not found.');
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching company data: ', error);
+    return null;
   }
 };

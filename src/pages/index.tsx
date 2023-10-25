@@ -3,8 +3,9 @@ import { Menu } from "@headlessui/react";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { fetchCompanyData } from "../../backend/firebase";
+import { fetchCompanyData, fetchCompanyDataById } from "../../backend/firebase";
 import { DocumentData } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
@@ -20,6 +21,29 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  const router = useRouter();
+  const { companyId } = router.query;
+
+  useEffect(() => {
+    if (companyId) {
+      const companyIdValue = Array.isArray(companyId) ? companyId[0] : companyId;
+
+      console.log('companyId:', companyId);
+      console.log('companyIdValue:', companyIdValue);
+
+      // Fetch data for the specified company using companyIdValue
+      fetchCompanyDataById(companyIdValue)
+        .then((companyData) => {
+          // Handle the company data (e.g., set it in state)
+          console.log('Fetched Company Data:', companyData);
+        })
+        .catch((error) => {
+          // Handle errors
+          console.error('Error fetching company data:', error);
+        });
+    }
+  }, [companyId]);
 
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
@@ -333,7 +357,7 @@ export default function Home() {
                             <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
                         </div>
                         {/* Button Label */}
-                        <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href="/companyProfile">Profil</Link>
+                        <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href={`/companyProfile?companyId=${companyId}`}>Profil</Link>
                       </div>
                     </div>
                   ))}

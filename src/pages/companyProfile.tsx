@@ -1,12 +1,31 @@
 import SEOHead from "@/components/SEOHead";
-import { locations, servicesType } from "@/constants";
 import { Menu } from "@headlessui/react";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { fetchCompanyData, fetchCompanyDataById } from "../../backend/firebase";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
 export default function CompanyProfile() {
+  const router = useRouter();
+  const { companyId } = router.query;
+
+  useEffect(() => {
+    if (companyId) {
+      const companyIdValue = Array.isArray(companyId) ? companyId[0] : companyId;
+      // Fetch data for the specified company using companyIdValue
+      fetchCompanyDataById(companyIdValue)
+        .then((companyData) => {
+          // Handle the company data (e.g., set it in state)
+        })
+        .catch((error) => {
+          // Handle errors
+        });
+    }
+  }, [companyId]);
+
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
   const description =
@@ -366,44 +385,5 @@ export default function CompanyProfile() {
         </div>
       </main>
     </div>
-  );
-}
-
-function Badge({ typeId }: { typeId: number }) {
-  const colorVariants = {
-    slate: "ring-slate-600/20 bg-slate-50 text-slate-700",
-    gray: "ring-gray-600/20 bg-gray-50 text-gray-700",
-    zinc: "ring-zinc-600/20 bg-zinc-50 text-zinc-700",
-    neutral: "ring-neutral-600/20 bg-neutral-50 text-neutral-700",
-    stone: "ring-stone-600/20 bg-stone-50 text-stone-700",
-    red: "ring-red-600/20 bg-red-50 text-red-700",
-    orange: "ring-orange-600/20 bg-orange-50 text-orange-700",
-    amber: "ring-amber-600/20 bg-amber-50 text-amber-700",
-    yellow: "ring-yellow-600/20 bg-yellow-50 text-yellow-700",
-    lime: "ring-lime-600/20 bg-lime-50 text-lime-700",
-    green: "ring-green-600/20 bg-green-50 text-green-700",
-    emerald: "ring-emerald-600/20 bg-emerald-50 text-emerald-700",
-    teal: "ring-teal-600/20 bg-teal-50 text-teal-700",
-    cyan: "ring-cyan-600/20 bg-cyan-50 text-cyan-700",
-    sky: "ring-sky-600/20 bg-sky-50 text-sky-700",
-    blue: "ring-blue-600/20 bg-blue-50 text-blue-700",
-    indigo: "ring-indigo-600/20 bg-indigo-50 text-indigo-700",
-    violet: "ring-violet-600/20 bg-violet-50 text-violet-700",
-    purple: "ring-purple-600/20 bg-purple-50 text-purple-700",
-    fuchsia: "ring-fuchsia-600/20 bg-fuchsia-50 text-fuchsia-700",
-    pink: "ring-pink-600/20 bg-pink-50 text-pink-700",
-    rose: "ring-rose-600/20 bg-rose-50 text-rose-700",
-  };
-
-  const service = servicesType.find((s) => s.id === typeId)!;
-
-  return (
-    <span
-      className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-        colorVariants[service?.color]
-      }`}
-    >
-      {service?.label}
-    </span>
   );
 }
