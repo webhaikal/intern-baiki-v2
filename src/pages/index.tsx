@@ -3,19 +3,19 @@ import { Menu } from "@headlessui/react";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { fetchUserData } from "../../backend/firebase";
+import { fetchCompanyData } from "../../backend/firebase";
 import { DocumentData } from "firebase/firestore";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
 export default function Home() {
-  const [userData, setUserData] = useState<DocumentData[]>([]);
+  const [companyData, setCompanyData] = useState<DocumentData[]>([]);
 
   useEffect(() => {
-    // Fetch user data when the component mounts
+    // Fetch company data when the component mounts
     const fetchData = async () => {
-      const users = await fetchUserData();
-      setUserData(users);
+      const companies = await fetchCompanyData();
+      setCompanyData(companies);
     };
 
     fetchData();
@@ -319,13 +319,13 @@ export default function Home() {
               </div>
               <div className="snap-start shrink-0">
                 <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto">
-                  {userData.map((user, index) => (
+                  {companyData.map((company, index) => (
                     <div className="rounded-lg bg-white p-3 focus:outline-none">
                       <p className="text-center font-semibold">
-                        {user.name}
+                        {company.name}
                       </p>
                       <p className="text-center">
-                        {user.district}, {user.state}
+                        {company.district}, {company.state}
                       </p>
                       <div className="flex flex-col items-center">
                         <div className="rounded-full p-2 mb-2">
@@ -501,13 +501,13 @@ export default function Home() {
               </div>
               <div className="snap-start shrink-0">
                 <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto">
-                  {userData.map((user, index) => (
+                  {companyData.map((company, index) => (
                     <div className="rounded-lg bg-white p-3 focus:outline-none">
                       <p className="text-center font-semibold">
-                        {user.name}
+                        {company.name}
                       </p>
                       <p className="text-center">
-                        {user.district}, {user.state}
+                        {company.district}, {company.state}
                       </p>
                       <div className="flex flex-col items-center">
                         <div className="rounded-full p-2 mb-2">

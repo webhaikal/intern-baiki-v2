@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
 // Reference to a Firestore collection
-const dataCollection = collection(db, "users"); // Replace with the actual collection name
+const dataCollection = collection(db, "companies"); // Replace with the actual collection name
 
 // Add a new document with the data
 export const addData = async (dataToSubmit: { name: string; state: string; district: string; description: string; time: string; contact: string; dribbleUrl: string; facebookUrl: string; instagramUrl: string; twitterUrl: string; picture1: string; picture2: string; picture3: string; picture4: string; }) => {
@@ -35,23 +35,23 @@ export const addData = async (dataToSubmit: { name: string; state: string; distr
   }
 };
 
-// Function to fetch user data from Firestore
-export const fetchUserData = async () => {
+// Function to fetch company data from Firestore
+export const fetchCompanyData = async () => {
   try {
-    const q = query(collection(db, 'users'));
+    const q = query(collection(db, 'companies'));
 
     const querySnapshot = await getDocs(q);
 
-    const userData: DocumentData[] = [];
+    const companyData: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
-      // Get data for each user
-      const user = doc.data();
-      userData.push(user);
+      // Get data for each company
+      const company = doc.data();
+      companyData.push(company);
     });
 
-    return userData;
+    return companyData;
   } catch (error) {
-    console.error('Error fetching user data: ', error);
+    console.error('Error fetching companies data: ', error);
     return [];
   }
 };
