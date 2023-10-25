@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, addDoc, DocumentData, doc, getDoc, documentId} from "firebase/firestore";
+import { getFirestore, collection, addDoc, DocumentData, doc, getDoc} from "firebase/firestore";
 import { getDocs, query, where, orderBy } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -42,13 +42,10 @@ export const fetchCompanyData = async () => {
 
     const querySnapshot = await getDocs(q);
 
-    const companyData: { documentId: string; }[] = [];
+    const companyData: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
-      // Get data for each company and include the documentId
-      const company = {
-        documentId: doc.id,
-        ...doc.data(),
-      };
+      // Get data for each company
+      const company = doc.data();
       companyData.push(company);
     });
 
@@ -59,27 +56,21 @@ export const fetchCompanyData = async () => {
   }
 };
 
-interface CompanyData {
-  name: string;
-  description: string;
-  // Add other properties as needed
-}
-
-// Modify your fetchCompanyDataById function in firebase.ts
-export const fetchCompanyDataById = async (documentId: string): Promise<CompanyData | null> => {
+// Function to fetch a specific company's data by companyId
+export const fetchCompanyDataById = async (companyId: string) => {
   try {
-    const companyDocRef = doc(db, 'companies', documentId);
+    const companyDocRef = doc(db, 'companies', companyId);
     const companyDoc = await getDoc(companyDocRef);
-
+    
     if (companyDoc.exists()) {
-      const companyData = companyDoc.data() as CompanyData; // Cast the data to the CompanyData type
+      const companyData = companyDoc.data();
       return companyData;
     } else {
-      console.error('Company document not found for documentId:', documentId);
+      console.error('Company document not found.');
       return null;
     }
   } catch (error) {
-    console.error('Error fetching company data:', error);
+    console.error('Error fetching company data: ', error);
     return null;
   }
 };

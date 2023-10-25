@@ -3,35 +3,28 @@ import { Menu } from "@headlessui/react";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchCompanyData, fetchCompanyDataById } from "../../backend/firebase";
-import { DocumentData } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
-interface CompanyData {
-  name: string;
-  description: string;
-  // Add other properties as needed
-}
-
 export default function CompanyProfile() {
-  const [companyData, setCompanyData] = useState<CompanyData | null>(null);
-  const location = useLocation();
-  const documentId = new URLSearchParams(location.search).get('documentId');
+  const router = useRouter();
+  const { companyId } = router.query;
 
   useEffect(() => {
-    if (documentId) {
-      fetchCompanyDataById(documentId)
-        .then((data: CompanyData | null) => { // Specify the type as CompanyData | null
-          setCompanyData(data);
+    if (companyId) {
+      const companyIdValue = Array.isArray(companyId) ? companyId[0] : companyId;
+      // Fetch data for the specified company using companyIdValue
+      fetchCompanyDataById(companyIdValue)
+        .then((companyData) => {
+          // Handle the company data (e.g., set it in state)
         })
         .catch((error) => {
-          console.error('Error fetching company data:', error);
+          // Handle errors
         });
     }
-  }, [documentId]);
+  }, [companyId]);
 
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
