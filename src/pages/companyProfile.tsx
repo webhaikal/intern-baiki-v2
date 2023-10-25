@@ -6,25 +6,35 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetchCompanyData, fetchCompanyDataById } from "../../backend/firebase";
 import { DocumentData } from "firebase/firestore";
-import { useLocation } from "react-router-dom";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
+// Define the CompanyData type according to your project structure
 interface CompanyData {
   name: string;
+  state: string;
+  district: string;
   description: string;
+  time: string;
+  contact: string;
+  dribbleUrl: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  twitterUrl: string;
   // Add other properties as needed
 }
 
 export default function CompanyProfile() {
+  const router = useRouter();
+  const { documentId } = router.query; // Extract documentId from the router query
+
   const [companyData, setCompanyData] = useState<CompanyData | null>(null);
-  const location = useLocation();
-  const documentId = new URLSearchParams(location.search).get('documentId');
 
   useEffect(() => {
     if (documentId) {
-      fetchCompanyDataById(documentId)
-        .then((data: CompanyData | null) => { // Specify the type as CompanyData | null
+      // Fetch the company data and update companyData state
+      fetchCompanyDataById(documentId as string) // Ensure documentId is a string
+        .then((data) => {
           setCompanyData(data);
         })
         .catch((error) => {
@@ -183,18 +193,18 @@ export default function CompanyProfile() {
             <div className="flex w-full focus:outline-none">
               <div className="flex px-10 mt-4">
                 <a className="text-red-500">
-                  Bukit Tinggi
+                {companyData ? companyData.district : 'Loading...'}
                 </a>
               </div>
             </div>
             <div className="flex w-full focus:outline-none px-10">
               <a className="font-semibold text-2xl">
-                iFIXIT
+                {companyData ? companyData.name : 'Loading...'}
               </a>
             </div>
             <div className="flex w-full focus:outline-none px-10">
               <a>
-                Pusat penggantian dan pertukaran alat-alat untuk iPhone.
+                {companyData ? companyData.description : 'Loading...'}
               </a>
             </div>
             <div className="flex w-full focus:outline-none px-10 gap-x-2 mt-6">
@@ -236,14 +246,14 @@ export default function CompanyProfile() {
             <div className="flex w-68 px-10 mt-6">
               <div className="border-2 border-black rounded w-80">
                 <p className="py-1 text-center">
-                  08.00 am - 09.00 pm
+                  {companyData ? companyData.time : 'Loading...'}
                 </p>
               </div>
             </div>
             <div className="flex w-68 px-10 mt-4">
               <div className="border-2 border-black rounded w-80">
                 <p className="py-1 text-center">
-                  016 - 234 5678
+                  {companyData ? companyData.contact : 'Loading...'}
                 </p>
               </div>
             </div>
@@ -290,18 +300,18 @@ export default function CompanyProfile() {
             <div className="flex w-full focus:outline-none">
               <div className="flex px-8 mt-4">
                 <a className="text-red-500">
-                  Bukit Tinggi
+                  {companyData ? companyData.district : 'Loading...'}
                 </a>
               </div>
             </div>
             <div className="flex w-full focus:outline-none px-8">
               <a className="font-semibold text-2xl">
-                iFIXIT
+                {companyData ? companyData.name : 'Loading...'}
               </a>
             </div>
             <div className="flex w-full focus:outline-none px-8">
               <a>
-                Pusat penggantian dan pertukaran alat-alat untuk iPhone.
+                {companyData ? companyData.description : 'Loading...'}
               </a>
             </div>
             <div className="flex w-full focus:outline-none px-8 gap-x-2 mt-6">
@@ -343,14 +353,14 @@ export default function CompanyProfile() {
             <div className="flex w-68 px-8 mt-6">
               <div className="border-2 border-black rounded w-full">
                 <p className="py-1 text-center">
-                  08.00 am - 09.00 pm
+                  {companyData ? companyData.time : 'Loading...'}
                 </p>
               </div>
             </div>
             <div className="flex w-68 px-8 mt-4">
               <div className="border-2 border-black rounded w-full">
                 <p className="py-1 text-center">
-                  016 - 234 5678
+                  {companyData ? companyData.contact : 'Loading...'}
                 </p>
               </div>
             </div>

@@ -61,7 +61,15 @@ export const fetchCompanyData = async () => {
 
 interface CompanyData {
   name: string;
+  state: string;
+  district: string;
   description: string;
+  time: string;
+  contact: string;
+  dribbleUrl: string;
+  facebookUrl: string;
+  instagramUrl: string;
+  twitterUrl: string;
   // Add other properties as needed
 }
 
