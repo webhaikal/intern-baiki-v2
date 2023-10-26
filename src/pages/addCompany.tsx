@@ -98,74 +98,45 @@ export default function Home() {
     "The most comprehensive list for repair services in Malaysia. Find the closest repair centre for you!";
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-white">
       {/* Header Desktop */}
-      <header className="relative z-10 flex items-center justify-between p-2" style={{ backgroundColor: "#F35252" }}>
-        <div className="hidden sm:inline-flex justify-center w-full">
+      <header className="relative z-10 flex items-center p-2" style={{ backgroundColor: "#FF1E26" }}>
+        <div className="hidden sm:inline-flex">
           <Link href="/">
             <img
-              src="/logo.png"
-              className="h-[50px] md:h-[62px] ml-10"
+              src="/baiki.png"
+              className="h-[50px] md:h-[50px] ml-10"
               alt="Baiki logo"
             />
           </Link>
         </div>
 
-        <div className="hidden md:inline-flex md:space-x-4">
-          {/* Add the Search Icon button with no background */}
+        <div className="hidden md:inline-flex md:space-x-4 ml-10 px-8">
+          {/* My Profile */}
           <button className="btn-normal-case">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-8 fill-white stroke-primary"
-            height="24" 
-            viewBox="0 -960 960 960" 
-            width="24"
-          >
-            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>
-          </svg>
+            <a className="text-white">
+              Profil Saya
+            </a>
           </button>
         </div>
 
-        <Menu>
-          <div className="hidden md:inline-flex md:space-x-4">
-            {/* Profile icon without a background */}
-            <Menu.Button>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-8 fill-white stroke-primary" 
-                height="24" 
-                viewBox="0 -960 960 960" 
-                width="24"
-              >
-                <path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/>
-              </svg>
-            </Menu.Button>
-            <Menu.Items className="absolute text-center right-3 z-10 mt-8 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <div className="px-0">
-                <Menu.Item>
-                  {({ active }) => (
-                    <Link
-                      className={`${active && 'bg-red-500 text-white block rounded-md px-4 py-2' || 'block rounded-md px-4 py-2'}`}
-                      href="/account-login"
-                    >
-                      Log Masuk
-                    </Link>
-                  )}
-                </Menu.Item>
-                <Menu.Item>
-                  {({ active }) => (
-                    <a
-                      className={`${active && 'bg-red-500 text-white block rounded-md px-4 py-2' || 'block rounded-md px-4 py-2'}`}
-                      href="/account-signup"
-                    >
-                      Daftar
-                    </a>
-                  )}
-                </Menu.Item>
-              </div>
-            </Menu.Items>
-          </div>
-        </Menu>
+        <div className="hidden md:inline-flex md:space-x-4 px-8">
+          {/* Add Shop */}
+          <button className="btn-normal-case">
+            <a className="text-white font-semibold">
+              Tambah Kedai
+            </a>
+          </button>
+        </div>
+
+        <div className="hidden md:inline-flex md:space-x-4 px-8">
+          {/* FAQ */}
+          <button className="btn-normal-case">
+            <a className="text-white">
+              FAQ
+            </a>
+          </button>
+        </div>
 
         {/* Header Mobile */}
         <div className="md:hidden inline-flex">
@@ -234,100 +205,173 @@ export default function Home() {
       </header>
 
       <SEOHead title={title} description={description} path="/" />
-      <main className="md:mt-4" style={{ backgroundColor: "#F5F5F5" }}>
+      <main className="md:mt-4 bg-white">
 
         {/* desktop view */}
-        <div className="mx-auto mb-16 mt-4 hidden max-w-6xl px-4 py-2 md:block bg-white">
-          <div className="flex w-full items-center">
-            <label htmlFor="name">Name: </label>
-            <input type="text" name="name" id="name" className="rounded-xl w-full ml-2">
-            </input>
+        <div className="mx-auto mb-16 mt-4 hidden max-w-6xl px-4 py-2 md:flex bg-white flex-row">
+          <div className="flex flex-col">
+            <div className="flex w-full items-center">
+              <img 
+                src="repair.png"
+                className="h-[50px] md:h-[512px]"
+              />
+            </div>
           </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="state">State: </label>
-            <input type="text" name="state" id="state" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="district">District: </label>
-            <input type="text" name="district" id="district" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="description">Description: </label>
-            <input type="text" name="description" id="description" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="type">Type: </label>
-            <input type="checkbox" name="type" value="smartphone" className="ml-2"></input>
-            <label htmlFor="type" className="ml-2">Telefon Pintar</label>
-            <input type="checkbox" name="type" value="smartwatch" className="ml-2"></input>
-            <label htmlFor="type" className="ml-2">Jam Pintar</label>
-            <input type="checkbox" name="type" value="laptop" className="ml-2"></input>
-            <label htmlFor="type" className="ml-2">Komputer Riba</label>
-            <input type="checkbox" name="type" value="camera" className="ml-2"></input>
-            <label htmlFor="type" className="ml-2">Kamera</label>
-            <input type="checkbox" name="type" value="accessory" className="ml-2"></input>
-            <label htmlFor="type" className="ml-2">Aksesori</label>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="time">Time: </label>
-            <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2">
-            </input>
-            <input type="time" name="time" id="timeEnd" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="contact">Contact: </label>
-            <input type="tel" name="contact" id="contact" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="dribbleUrl">Dribble: </label>
-            <input type="text" name="dribbleUrl" id="dribbleUrl" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="facebookUrl">Facebook: </label>
-            <input type="text" name="FacebookUrl" id="FacebookUrl" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="instagramUrl">Instagram: </label>
-            <input type="text" name="instagramUrl" id="instagramUrl" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="twitterUrl">Twitter: </label>
-            <input type="text" name="twitterUrl" id="twitterUrl" className="rounded-xl w-full ml-2">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="picture1">Picture 1: </label>
-            <input type="file" name="picture1" id="picture1" className="ml-2" accept="image/*">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="picture2">Picture 2: </label>
-            <input type="file" name="picture2" id="picture2" className="ml-2" accept="image/*">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="picture3">Picture 3: </label>
-            <input type="file" name="picture3" id="picture3" className="ml-2" accept="image/*">
-            </input>
-          </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="picture4">Picture 4: </label>
-            <input type="file" name="picture4" id="picture4" className="ml-2" accept="image/*">
-            </input>
-          </div>
-          <div className="flex md:inline-flex md:space-x-4 mt-2">
-            <button className="inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-red focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" 
-            onClick={handleSubmit}>
-              Submit
-            </button>
+          <div className="flex flex-col">
+            <div className="flex w-full items-center py-1">
+              <a className="font-semibold text-4xl">
+                Tambah Kedai
+              </a>
+            </div>
+            <div className="flex w-full items-center py-1">
+              <a className="font-thin">
+                Tambah atau kemaskini maklumat mengenai kedai anda
+              </a>
+            </div>
+            <div className="flex w-full items-center py-4">
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+                <button className="tablinks">
+                  Maklumat Kedai
+                </button>
+              </div>
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+                <button className="tablinks">
+                  Servis
+                </button>
+              </div>
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+                <button className="tablinks">
+                  Hubungi Kami
+                </button>
+              </div>
+            </div>
+            <div className="flex w-full flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="name">Nama Kedai</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="name" id="name" className="rounded-xl w-full ml-2" placeholder="Cth: Kedai Baiki Kami"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="state">Negeri</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2" placeholder="Cth: Selangor"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="district">Bandar</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="district" id="district" className="rounded-xl w-full ml-2" placeholder="Cth: Ampang"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="description">Deskripsi Servis</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="description" id="description" className="rounded-xl w-full ml-2" placeholder="Cth: Kedai Baiki Kami"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="type">Kategori Gajet</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="checkbox" name="type" value="smartphone" className="ml-2"></input>
+                <label htmlFor="type" className="ml-2">Telefon Pintar</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="checkbox" name="type" value="smartwatch" className="ml-2"></input>
+                <label htmlFor="type" className="ml-2">Jam Pintar</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="checkbox" name="type" value="laptop" className="ml-2"></input>
+                <label htmlFor="type" className="ml-2">Komputer Riba</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="checkbox" name="type" value="camera" className="ml-2"></input>
+                <label htmlFor="type" className="ml-2">Kamera</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="checkbox" name="type" value="accessory" className="ml-2"></input>
+                <label htmlFor="type" className="ml-2">Aksesori</label>
+              </div>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="time">Time: </label>
+              <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2">
+              </input>
+              <input type="time" name="time" id="timeEnd" className="rounded-xl w-full ml-2">
+              </input>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="contact">Nombor Telefon</label>
+              </div>
+              <div className="flex flex-row">
+              <input type="tel" name="contact" id="contact" className="rounded-xl w-full ml-2" placeholder="Cth: 0123456789"/>
+              </div>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="dribbleUrl">Dribble: </label>
+              <input type="text" name="dribbleUrl" id="dribbleUrl" className="rounded-xl w-full ml-2">
+              </input>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="facebookUrl">Facebook: </label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="FacebookUrl" id="FacebookUrl" className="rounded-xl w-full ml-2"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-col px-4 mb-2">
+                <label htmlFor="instagramUrl">Instagram: </label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="instagramUrl" id="instagramUrl" className="rounded-xl w-full ml-2"/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="twitterUrl">Twitter: </label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="twitterUrl" id="twitterUrl" className="rounded-xl w-full ml-2"/>
+              </div>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="picture1">Picture 1: </label>
+              <input type="file" name="picture1" id="picture1" className="ml-2" accept="image/*">
+              </input>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="picture2">Picture 2: </label>
+              <input type="file" name="picture2" id="picture2" className="ml-2" accept="image/*">
+              </input>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="picture3">Picture 3: </label>
+              <input type="file" name="picture3" id="picture3" className="ml-2" accept="image/*">
+              </input>
+            </div>
+            <div className="flex w-full items-center mt-2">
+              <label htmlFor="picture4">Picture 4: </label>
+              <input type="file" name="picture4" id="picture4" className="ml-2" accept="image/*">
+              </input>
+            </div>
+            <div className="flex md:inline-flex md:space-x-4 mt-2">
+              <button className="inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-red focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" 
+              onClick={handleSubmit}>
+                Submit
+              </button>
+            </div>
           </div>
         </div>
 
