@@ -4,8 +4,7 @@ import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { fetchCompanyData, fetchCompanyDataById } from "../../backend/firebase";
-import { DocumentData } from "firebase/firestore";
+import { fetchCompanyDataById } from "../../backend/firebase";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
