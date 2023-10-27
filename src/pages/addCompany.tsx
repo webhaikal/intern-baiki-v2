@@ -325,7 +325,7 @@ export default function Home() {
                 <label htmlFor="location">Lokasi</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="location" id="location" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: https://maps.app.goo.gl/yyUYuNMN9eF7PUzw6" required/>
+                <input type="text" name="location" id="location" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 3.158880209637858, 101.70491202420591" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
