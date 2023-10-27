@@ -21,11 +21,39 @@ export default function Home() {
     const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
     const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
     const contact = (document.getElementById("contact") as HTMLInputElement)?.value || (document.getElementById("mobile_contact") as HTMLInputElement)?.value;
-    const dribbleUrl = (document.getElementById("dribbleUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_dribbleUrl") as HTMLInputElement)?.value;
+    const email = (document.getElementById("email") as HTMLInputElement)?.value || (document.getElementById("mobile_email") as HTMLInputElement)?.value;
+    const websiteUrl = (document.getElementById("websiteUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_websiteUrl") as HTMLInputElement)?.value;
     const facebookUrl = (document.getElementById("FacebookUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_FacebookUrl") as HTMLInputElement)?.value;
     const instagramUrl = (document.getElementById("instagramUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_instagramUrl") as HTMLInputElement)?.value;
     const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
-  
+
+    // Check if any of the required fields are empty
+    if (!name || !state || !district || !description || !timeStart || !timeEnd || !contact || !email) {
+      // Display an error message to the user or prevent form submission
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    // Check if "contact" is a valid number (you can customize the validation)
+    if (!/^\d{10}$|^\d{11}$/.test(contact)) {
+      alert("Please enter a valid 10-digit or 11-digit contact number.");
+      return;
+    }
+
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let isChecked = false;
+
+    checkboxes.forEach((checkbox) => {
+      if ((checkbox as HTMLInputElement).checked) {
+        isChecked = true;
+      }
+    });
+
+    if (!isChecked) {
+      alert("Please select at least one checkbox.");
+      return; // Do not proceed with form submission
+    }
+    
     // Initialize variables for picture URLs
     let picture1Url = "";
     let picture2Url = "";
@@ -76,7 +104,8 @@ export default function Home() {
       type: selectedTypes, // Store selected types as an array
       time: `${timeStart} - ${timeEnd}`,
       contact,
-      dribbleUrl,
+      email,
+      websiteUrl,
       facebookUrl,
       instagramUrl,
       twitterUrl,
@@ -250,7 +279,7 @@ export default function Home() {
                 <label htmlFor="name">Nama Kedai</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="name" id="name" className="rounded-xl w-full ml-2" placeholder="Cth: Kedai Baiki Kami"/>
+                <input type="text" name="name" id="name" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Kedai Baiki Kami" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -258,7 +287,7 @@ export default function Home() {
                 <label htmlFor="state">Negeri</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2" placeholder="Cth: Selangor"/>
+                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Selangor" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -266,7 +295,7 @@ export default function Home() {
                 <label htmlFor="district">Bandar</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="district" id="district" className="rounded-xl w-full ml-2" placeholder="Cth: Ampang"/>
+                <input type="text" name="district" id="district" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Ampang" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -274,7 +303,7 @@ export default function Home() {
                 <label htmlFor="description">Deskripsi Servis</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="description" id="description" className="rounded-xl w-full ml-2" placeholder="Cth: Kedai Baiki Kami"/>
+                <input type="text" name="description" id="description" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Kedai Baiki Kami" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -302,32 +331,45 @@ export default function Home() {
                 <label htmlFor="type" className="ml-2">Aksesori</label>
               </div>
             </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="time">Time: </label>
-              <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2">
-              </input>
-              <input type="time" name="time" id="timeEnd" className="rounded-xl w-full ml-2">
-              </input>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="time">Masa Operasi</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" required />
+                <input type="time" name="time" id="timeEnd" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" required />
+              </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
               <div className="flex flex-row px-4 mb-2">
                 <label htmlFor="contact">Nombor Telefon</label>
               </div>
               <div className="flex flex-row">
-              <input type="tel" name="contact" id="contact" className="rounded-xl w-full ml-2" placeholder="Cth: 0123456789"/>
+              <input type="tel" name="contact" id="contact" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 0123456789" required/>
               </div>
             </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="dribbleUrl">Dribble: </label>
-              <input type="text" name="dribbleUrl" id="dribbleUrl" className="rounded-xl w-full ml-2">
-              </input>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="email">Emel</label>
+              </div>
+              <div className="flex flex-row">
+              <input type="email" name="email" id="email" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: amanz@dev.my" required/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="websiteUrl">Website</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="websiteUrl" id="websiteUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://amanz.my/"/>
+              </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
               <div className="flex flex-row px-4 mb-2">
                 <label htmlFor="facebookUrl">Facebook: </label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="FacebookUrl" id="FacebookUrl" className="rounded-xl w-full ml-2"/>
+                <input type="text" name="FacebookUrl" id="FacebookUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://www.facebook.com/AmanzNetwork/"/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -335,7 +377,7 @@ export default function Home() {
                 <label htmlFor="instagramUrl">Instagram: </label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="instagramUrl" id="instagramUrl" className="rounded-xl w-full ml-2"/>
+                <input type="text" name="instagramUrl" id="instagramUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://www.instagram.com/amanz.my/"/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -343,7 +385,7 @@ export default function Home() {
                 <label htmlFor="twitterUrl">Twitter: </label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="twitterUrl" id="twitterUrl" className="rounded-xl w-full ml-2"/>
+                <input type="text" name="twitterUrl" id="twitterUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://twitter.com/amanz"/>
               </div>
             </div>
             <div className="flex w-full items-center mt-2">
@@ -428,7 +470,7 @@ export default function Home() {
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="dribbleUrl">Dribble: </label>
-            <input type="text" name="dribbleUrl" id="mobile_dribbleUrl" className="rounded-xl w-full ml-2">
+            <input type="text" name="dribbleUrl" id="mobile_websiteUrl" className="rounded-xl w-full ml-2">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
