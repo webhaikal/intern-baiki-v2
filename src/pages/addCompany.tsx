@@ -19,6 +19,7 @@ export default function Home() {
     const postcode = (document.getElementById("postcode") as HTMLInputElement)?.value || (document.getElementById("mobile_postcode") as HTMLInputElement)?.value;
     const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
     const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
+    const location = (document.getElementById("location") as HTMLInputElement)?.value || (document.getElementById("mobile_location") as HTMLInputElement)?.value;
     const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
     const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
     const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
@@ -30,7 +31,7 @@ export default function Home() {
     const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
 
     // Check if any of the required fields are empty
-    if (!name || !address || !postcode || !district || !state || !description || !timeStart || !timeEnd || !contact || !email) {
+    if (!name || !address || !postcode || !district || !state || !location || !description || !timeStart || !timeEnd || !contact || !email) {
       // Display an error message to the user or prevent form submission
       alert("Please fill out all required fields.");
       return;
@@ -104,6 +105,7 @@ export default function Home() {
       postcode,
       district,
       state,
+      location,
       description,
       type: selectedTypes, // Store selected types as an array
       time: `${timeStart} - ${timeEnd}`,
@@ -320,6 +322,14 @@ export default function Home() {
             </div>
             <div className="flex w-full mt-2 flex-col">
               <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="location">Lokasi</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="location" id="location" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: https://maps.app.goo.gl/yyUYuNMN9eF7PUzw6" required/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
                 <label htmlFor="description">Deskripsi Servis</label>
               </div>
               <div className="flex flex-row">
@@ -465,6 +475,11 @@ export default function Home() {
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
+            <label htmlFor="location">Location: </label>
+            <input type="text" name="location" id="mobile_location" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
             <label htmlFor="description">Description: </label>
             <input type="text" name="description" id="mobile_description" className="rounded-xl w-full ml-2">
             </input>
@@ -499,8 +514,8 @@ export default function Home() {
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
-            <label htmlFor="dribbleUrl">Dribble: </label>
-            <input type="text" name="dribbleUrl" id="mobile_websiteUrl" className="rounded-xl w-full ml-2">
+            <label htmlFor="websiteUrl">Website: </label>
+            <input type="text" name="websiteUrl" id="mobile_websiteUrl" className="rounded-xl w-full ml-2">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">

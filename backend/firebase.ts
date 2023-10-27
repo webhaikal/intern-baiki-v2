@@ -65,6 +65,7 @@ interface CompanyData {
   postcode: string;
   district: string;
   state: string;
+  location: string;
   description: string;
   time: string;
   contact: string;
