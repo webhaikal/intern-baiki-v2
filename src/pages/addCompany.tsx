@@ -15,8 +15,10 @@ export default function Home() {
 
   const handleSubmit = async () => {
     const name = (document.getElementById("name") as HTMLInputElement)?.value || (document.getElementById("mobile_name") as HTMLInputElement)?.value;
-    const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
+    const address = (document.getElementById("address") as HTMLInputElement)?.value || (document.getElementById("mobile_address") as HTMLInputElement)?.value;
+    const postcode = (document.getElementById("postcode") as HTMLInputElement)?.value || (document.getElementById("mobile_postcode") as HTMLInputElement)?.value;
     const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
+    const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
     const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
     const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
     const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
@@ -28,7 +30,7 @@ export default function Home() {
     const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
 
     // Check if any of the required fields are empty
-    if (!name || !state || !district || !description || !timeStart || !timeEnd || !contact || !email) {
+    if (!name || !address || !postcode || !district || !state || !description || !timeStart || !timeEnd || !contact || !email) {
       // Display an error message to the user or prevent form submission
       alert("Please fill out all required fields.");
       return;
@@ -98,8 +100,10 @@ export default function Home() {
     
     const dataToSubmit = {
       name,
-      state,
+      address,
+      postcode,
       district,
+      state,
       description,
       type: selectedTypes, // Store selected types as an array
       time: `${timeStart} - ${timeEnd}`,
@@ -284,10 +288,18 @@ export default function Home() {
             </div>
             <div className="flex w-full mt-2 flex-col">
               <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="state">Negeri</label>
+                <label htmlFor="address">Alamat</label>
               </div>
               <div className="flex flex-row">
-                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Selangor" required/>
+                <input type="text" name="address" id="address" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Mercu Summer Suites, Jalan Cendana" required/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="postcode">Poskod</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="postcode" id="postcode" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 50250" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -296,6 +308,14 @@ export default function Home() {
               </div>
               <div className="flex flex-row">
                 <input type="text" name="district" id="district" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Ampang" required/>
+              </div>
+            </div>
+            <div className="flex w-full mt-2 flex-col">
+              <div className="flex flex-row px-4 mb-2">
+                <label htmlFor="state">Negeri</label>
+              </div>
+              <div className="flex flex-row">
+                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Selangor" required/>
               </div>
             </div>
             <div className="flex w-full mt-2 flex-col">
@@ -424,14 +444,24 @@ export default function Home() {
             <input type="text" name="name" id="mobile_name" className="rounded-xl w-full ml-2">
             </input>
           </div>
-          <div className="flex w-full items-center mt-2">
-            <label htmlFor="state">State: </label>
-            <input type="text" name="state" id="mobile_state" className="rounded-xl w-full ml-2">
+          <div className="flex w-full items-center">
+            <label htmlFor="address">Address: </label>
+            <input type="text" name="address" id="mobile_address" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center">
+            <label htmlFor="postcode">Postcode: </label>
+            <input type="text" name="postcode" id="mobile_postcode" className="rounded-xl w-full ml-2">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="district">District: </label>
             <input type="text" name="district" id="mobile_district" className="rounded-xl w-full ml-2">
+            </input>
+          </div>
+          <div className="flex w-full items-center mt-2">
+            <label htmlFor="state">State: </label>
+            <input type="text" name="state" id="mobile_state" className="rounded-xl w-full ml-2">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
