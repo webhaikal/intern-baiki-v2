@@ -70,6 +70,7 @@ interface CompanyData {
   facebookUrl: string;
   instagramUrl: string;
   twitterUrl: string;
+  picture1: string;
   // Add other properties as needed
 }
 

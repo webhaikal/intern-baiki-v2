@@ -325,7 +325,7 @@ export default function Home() {
             </p>
           </div>
           <div className="relative mt-8">
-            <div className="relative w-full flex gap-4 snap-x snap-mandatory overflow-x-auto">
+            <div className="relative w-full flex gap-4 overflow-x-auto">
               <div className="snap-start shrink-0">
                 <button className="rounded-lg bg-white p-3 focus:outline-none h-full">
                   <div className="flex flex-col items-center p-2 mb-2">
@@ -342,7 +342,7 @@ export default function Home() {
                 </button>
               </div>
               <div className="snap-start shrink-0">
-                <div className="flex gap-4 snap-x snap-mandatory overflow-x-auto">
+                <div className="flex gap-4">
                   {companyData.map((company, index) => (
                     <div className="rounded-lg bg-white p-3 focus:outline-none">
                       <p className="text-center font-semibold">
@@ -354,7 +354,11 @@ export default function Home() {
                       <div className="flex flex-col items-center">
                         <div className="rounded-full p-2 mb-2">
                           {/* Image */}
-                            <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                          {company.picture1 ? (
+                            <img className="max-w-[400px] h-[150px]" src={company.picture1} />
+                            ) : (
+                              'Loading...'
+                            )}
                         </div>
                         {/* Button Label */}
                         <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href={`/companyProfile?documentId=${company.documentId}`}>Profil</Link>
@@ -536,8 +540,12 @@ export default function Home() {
                       <div className="flex flex-col items-center">
                         <div className="rounded-full p-2 mb-2">
                           {/* Image */}
-                            <img src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-                        </div>
+                          {company.picture1 ? (
+                            <img className="max-w-[250px] h-[100px]" src={company.picture1} />
+                          ) : (
+                            'Loading...'
+                          )}
+                          </div>
                         {/* Button Label */}
                         <Link className="rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white px-4 py-2" href={`/companyProfile?documentId=${company.documentId}`}>Profil</Link>
                       </div>
