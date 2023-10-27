@@ -16,10 +16,11 @@ interface CompanyData {
   description: string;
   time: string;
   contact: string;
-  dribbleUrl: string;
+  websiteUrl: string;
   facebookUrl: string;
   instagramUrl: string;
   twitterUrl: string;
+  picture1: string;
   // Add other properties as needed
 }
 
@@ -41,6 +42,27 @@ export default function CompanyProfile() {
         });
     }
   }, [documentId]);
+
+  const convertRangeTo12HourFormat = (timeRange24: string): string => {
+    const [startTime24, endTime24] = timeRange24.split(' - ');
+    const convertTo12HourFormat = (time24: string): string => {
+      const [hours, minutes] = time24.split(':');
+      let period = 'AM';
+      let parsedHours = parseInt(hours); // Parse hours as an integer
+      if (parsedHours >= 12) {
+        period = 'PM';
+        if (parsedHours > 12) {
+          parsedHours -= 12; // Update hours
+        }
+      }
+      return `${parsedHours}:${minutes} ${period}`;
+    };
+  
+    const start12Hour = convertTo12HourFormat(startTime24);
+    const end12Hour = convertTo12HourFormat(endTime24);
+  
+    return `${start12Hour} - ${end12Hour}`;
+  };
 
   const title =
     "Baiki.com – Your One-Stop Gadget Services Hub in Malaysia!";
@@ -207,6 +229,7 @@ export default function CompanyProfile() {
               </a>
             </div>
             <div className="flex w-full focus:outline-none px-10 gap-x-2 mt-6">
+              {/* Website Icon */}
               <svg 
                 width="24" 
                 height="24" 
@@ -215,6 +238,7 @@ export default function CompanyProfile() {
                 xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM5.14386 17.8201C3.81099 16.2515 3.00683 14.2197 3.00683 12L3.00683 11.9978C6.61307 11.9618 9.57567 11.4838 12.2422 10.5779C12.4668 11.0605 12.6847 11.5534 12.8956 12.0564C12.5555 12.1691 12.221 12.2949 11.8918 12.4335C9.24177 13.5489 7.00538 15.4612 5.14386 17.8201ZM6.60614 19.1967C8.10884 20.3248 9.97636 20.9932 12 20.9932C13.2188 20.9932 14.3809 20.7507 15.4409 20.3114C14.9668 18.0368 14.352 15.907 13.6265 13.9217C13.3003 14.0264 12.9807 14.1451 12.6677 14.2768C10.356 15.2499 8.33843 16.9649 6.60614 19.1967ZM15.5924 13.4765C16.2479 15.3019 16.8129 17.2399 17.267 19.2902C19.048 18.0013 20.338 16.0757 20.8032 13.8473C18.9143 13.3589 17.1821 13.2604 15.5924 13.4765ZM14.8575 11.5662C16.754 11.2412 18.7996 11.3067 20.9917 11.8332C20.9578 9.97415 20.3599 8.25291 19.3619 6.8334C17.6358 8.0531 15.9276 9.06168 14.1111 9.85398C14.3687 10.4121 14.6177 10.9829 14.8575 11.5662ZM11.3457 8.76846C8.99734 9.53429 6.39047 9.94463 3.2312 9.9948C3.85725 7.24565 5.74294 4.97565 8.24906 3.82401C9.34941 5.31262 10.3933 6.96064 11.3457 8.76846ZM13.2302 8.05623C14.8876 7.34152 16.4466 6.43089 18.0282 5.32624C16.4333 3.88469 14.3192 3.00683 12 3.00683C11.4014 3.00683 10.8165 3.06531 10.2506 3.17688C11.3103 4.66337 12.3129 6.28992 13.2302 8.05623Z" fill="#0F0F0F"/>
               </svg>
+              {/* Facebook Icon */}
               <svg 
                 width="24" 
                 height="24" 
@@ -223,6 +247,7 @@ export default function CompanyProfile() {
                 xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 12C22 6.47714 17.5229 1.99999 12 1.99999C6.47715 1.99999 2 6.47714 2 12C2 16.9913 5.65686 21.1283 10.4375 21.8785V14.8906H7.89844V12H10.4375V9.79687C10.4375 7.29062 11.9304 5.90624 14.2146 5.90624C15.3087 5.90624 16.4531 6.10155 16.4531 6.10155V8.56249H15.1921C13.9499 8.56249 13.5625 9.33333 13.5625 10.1242V12H16.3359L15.8926 14.8906H13.5625V21.8785C18.3431 21.1283 22 16.9913 22 12Z" fill="#000000"/>
               </svg>
+              {/* Instagram Icon */}
               <svg 
                 width="24" 
                 height="24" 
@@ -233,6 +258,7 @@ export default function CompanyProfile() {
                 <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#0F0F0F"/>
                 <path fillRule="evenodd" clipRule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#0F0F0F"/>
               </svg>
+              {/* Twitter Icon */}
               <svg 
                 width="24" 
                 height="24" 
@@ -245,7 +271,7 @@ export default function CompanyProfile() {
             <div className="flex w-68 px-10 mt-6">
               <div className="border-2 border-black rounded w-80">
                 <p className="py-1 text-center">
-                  {companyData ? companyData.time : 'Loading...'}
+                  {companyData ? convertRangeTo12HourFormat(companyData.time) : 'Loading...'}
                 </p>
               </div>
             </div>
@@ -288,7 +314,11 @@ export default function CompanyProfile() {
           <div className="flex flex-col">
             <div className="flex mt-4 px-10">
               {/* Pictures here */}
-              <img className="rounded-md" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+              {companyData ? (
+                <img className="rounded-md" src={companyData.picture1} />
+              ) : (
+                'Loading...'
+              )}
             </div>
           </div>
         </div>
@@ -352,7 +382,7 @@ export default function CompanyProfile() {
             <div className="flex w-68 px-8 mt-6">
               <div className="border-2 border-black rounded w-full">
                 <p className="py-1 text-center">
-                  {companyData ? companyData.time : 'Loading...'}
+                  {companyData ? convertRangeTo12HourFormat(companyData.time) : 'Loading...'}
                 </p>
               </div>
             </div>
@@ -366,7 +396,11 @@ export default function CompanyProfile() {
             <div className="flex flex-col">
               <div className="flex mt-4 px-10">
                 {/* Pictures here */}
-                <img className="rounded-md" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+                {companyData ? (
+                  <img className="rounded-md" src={companyData.picture1} />
+                ) : (
+                  'Loading...'
+                )}
               </div>
             </div>
             <div className="flex w-68 px-8 mt-6">
