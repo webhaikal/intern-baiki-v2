@@ -357,17 +357,17 @@ export default function Home() {
               </a>
             </div>
             <div className="flex w-full items-center py-4">
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("companyInformation")}>
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500 active:bg-red-600" onClick={() => switchTab("companyInformation")}>
                 <button className="tablinks">
                   Maklumat Kedai
                 </button>
               </div>
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("service")}>
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500 active:bg-red-600" onClick={() => switchTab("service")}>
                 <button className="tablinks">
                   Servis
                 </button>
               </div>
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("contactUs")}>
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500 active:bg-red-600" onClick={() => switchTab("contactUs")}>
                 <button className="tablinks">
                   Hubungi Kami
                 </button>
