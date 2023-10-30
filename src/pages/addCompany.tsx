@@ -6,6 +6,7 @@ import { addData } from "../../backend/firebase";
 import { useRouter } from "next/router";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getStorage } from "firebase/storage";
+import { useState } from "react";
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
@@ -123,8 +124,100 @@ export default function Home() {
   
     // Call the function to add the data to Firebase
     addData(dataToSubmit);
+    console.log("formData");
 
     router.push("/");
+  };
+
+  type FormData = {
+    companyInformation: {
+      name: string;
+      address: string;
+      postcode: string;
+      district: string;
+      state: string;
+      location: string;
+    };
+    service: {
+      type: string[];
+      description: string;
+      timeStart: string;
+      timeEnd: string;
+      picture1: File | null; // Use the appropriate type for picture1
+      picture2: File | null; // Use the appropriate type for picture2
+      picture3: File | null; // Use the appropriate type for picture3
+      picture4: File | null; // Use the appropriate type for picture4
+    };
+    contactUs: {
+      email: string;
+      contact: string;
+      websiteUrl: string;
+      instagramUrl: string;
+      twitterUrl: string;
+      FacebookUrl: string;
+    };
+  };
+
+  const [activeTab, setActiveTab] = useState('companyInformation'); // Default active tab
+  const [formData, setFormData] = useState({
+    companyInformation: {
+      name: '',
+      address: '',
+      postcode: '',
+      district: '',
+      state: '',
+      location: '',
+    },
+    service: {
+      type: [] as string[],
+      description: '',
+      timeStart: '',
+      timeEnd: '',
+      picture1: null,
+      picture2: null,
+      picture3: null,
+      picture4: null,
+    },
+    contactUs: {
+      email: '',
+      contact: '',
+      websiteUrl: '',
+      instagramUrl: '',
+      twitterUrl: '',
+      FacebookUrl: '',
+    },
+  });
+
+  const handleInputChange = (tab: keyof FormData, field: string, value: any) => {
+    setFormData((prevData) => {
+      if (tab === 'service' && field === 'type') {
+        // For checkbox inputs in the 'service' section
+        const updatedType = prevData.service.type.includes(value)
+          ? prevData.service.type.filter((item) => item !== value)
+          : [...prevData.service.type, value];
+  
+        return {
+          ...prevData,
+          service: {
+            ...prevData.service,
+            type: updatedType,
+          },
+        };
+      }
+  
+      return {
+        ...prevData,
+        [tab]: {
+          ...prevData[tab],
+          [field]: value,
+        },
+      };
+    });
+  }; 
+  
+  // Function to switch tabs
+  const switchTab = (tabName: string) => {
+    setActiveTab(tabName);
   };
 
   const title =
@@ -264,180 +357,372 @@ export default function Home() {
               </a>
             </div>
             <div className="flex w-full items-center py-4">
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("companyInformation")}>
                 <button className="tablinks">
                   Maklumat Kedai
                 </button>
               </div>
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("service")}>
                 <button className="tablinks">
                   Servis
                 </button>
               </div>
-              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500">
+              <div className="tab border-solid border-2 mx-auto px-10 text-black rounded-2xl border-gray-500 hover:text-white hover:bg-red-500" onClick={() => switchTab("contactUs")}>
                 <button className="tablinks">
                   Hubungi Kami
                 </button>
               </div>
             </div>
-            <div className="flex w-full flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="name">Nama Kedai</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="name" id="name" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Kedai Baiki Kami" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="address">Alamat</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="address" id="address" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Mercu Summer Suites, Jalan Cendana" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="postcode">Poskod</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="postcode" id="postcode" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 50250" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="district">Bandar</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="district" id="district" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Ampang" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="state">Negeri</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="state" id="state" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Selangor" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="location">Lokasi</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="location" id="location" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 3.158880209637858, 101.70491202420591" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="description">Deskripsi Servis</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="description" id="description" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: Kedai Baiki Kami" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="type">Kategori Gajet</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="checkbox" name="type" value="smartphone" className="ml-2"></input>
-                <label htmlFor="type" className="ml-2">Telefon Pintar</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="checkbox" name="type" value="smartwatch" className="ml-2"></input>
-                <label htmlFor="type" className="ml-2">Jam Pintar</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="checkbox" name="type" value="laptop" className="ml-2"></input>
-                <label htmlFor="type" className="ml-2">Komputer Riba</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="checkbox" name="type" value="camera" className="ml-2"></input>
-                <label htmlFor="type" className="ml-2">Kamera</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="checkbox" name="type" value="accessory" className="ml-2"></input>
-                <label htmlFor="type" className="ml-2">Aksesori</label>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="time">Masa Operasi</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="time" name="time" id="timeStart" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" required />
-                <input type="time" name="time" id="timeEnd" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" required />
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="contact">Nombor Telefon</label>
-              </div>
-              <div className="flex flex-row">
-              <input type="tel" name="contact" id="contact" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: 0123456789" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="email">Emel</label>
-              </div>
-              <div className="flex flex-row">
-              <input type="email" name="email" id="email" className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" placeholder="Cth: amanz@dev.my" required/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="websiteUrl">Website</label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="websiteUrl" id="websiteUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://amanz.my/"/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="facebookUrl">Facebook: </label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="FacebookUrl" id="FacebookUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://www.facebook.com/AmanzNetwork/"/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-col px-4 mb-2">
-                <label htmlFor="instagramUrl">Instagram: </label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="instagramUrl" id="instagramUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://www.instagram.com/amanz.my/"/>
-              </div>
-            </div>
-            <div className="flex w-full mt-2 flex-col">
-              <div className="flex flex-row px-4 mb-2">
-                <label htmlFor="twitterUrl">Twitter: </label>
-              </div>
-              <div className="flex flex-row">
-                <input type="text" name="twitterUrl" id="twitterUrl" className="rounded-xl w-full ml-2" placeholder="Cth: https://twitter.com/amanz"/>
-              </div>
-            </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="picture1">Picture 1: </label>
-              <input type="file" name="picture1" id="picture1" className="ml-2" accept="image/*">
-              </input>
-            </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="picture2">Picture 2: </label>
-              <input type="file" name="picture2" id="picture2" className="ml-2" accept="image/*">
-              </input>
-            </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="picture3">Picture 3: </label>
-              <input type="file" name="picture3" id="picture3" className="ml-2" accept="image/*">
-              </input>
-            </div>
-            <div className="flex w-full items-center mt-2">
-              <label htmlFor="picture4">Picture 4: </label>
-              <input type="file" name="picture4" id="picture4" className="ml-2" accept="image/*">
-              </input>
-            </div>
+            {/* Form Sections */}
+            {activeTab === 'companyInformation' && (
+              <>
+                <div className="flex w-full flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="name">Nama Kedai</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="name" 
+                      id="name" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: Kedai Baiki Kami" 
+                      required 
+                      value={formData.companyInformation.name} onChange={(e) => handleInputChange('companyInformation', 'name', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="address">Alamat</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="address" 
+                      id="address" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: Mercu Summer Suites, Jalan Cendana" 
+                      required 
+                      value={formData.companyInformation.address} onChange={(e) => handleInputChange('companyInformation', 'address', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="postcode">Poskod</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="postcode" 
+                      id="postcode" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: 50250" 
+                      required 
+                      value={formData.companyInformation.postcode} onChange={(e) => handleInputChange('companyInformation', 'postcode', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="district">Bandar</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="district" 
+                      id="district" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: Ampang" 
+                      required 
+                      value={formData.companyInformation.district} onChange={(e) => handleInputChange('companyInformation', 'district', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="state">Negeri</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="state" 
+                      id="state" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: Selangor" 
+                      required 
+                      value={formData.companyInformation.state} onChange={(e) => handleInputChange('companyInformation', 'state', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="location">Lokasi</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="location" 
+                      id="location" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: 3.158880209637858, 101.70491202420591" 
+                      required 
+                      value={formData.companyInformation.location} onChange={(e) => handleInputChange('companyInformation', 'location', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+            {activeTab === 'service' && (
+              <>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="type">Kategori Gajet</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="checkbox"
+                      name="type"
+                      value="smartwatch"
+                      className="ml-2"
+                      checked={formData.service.type.includes('smartwatch')}
+                      onChange={() => handleInputChange('service', 'type', 'smartwatch')}
+                    />
+                    <label htmlFor="type" className="ml-2">
+                      Jam Pintar
+                    </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="checkbox"
+                      name="type"
+                      value="laptop"
+                      className="ml-2"
+                      checked={formData.service.type.includes('laptop')}
+                      onChange={() => handleInputChange('service', 'type', 'laptop')}
+                    />
+                    <label htmlFor="type" className="ml-2">
+                      Komputer Riba
+                    </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="checkbox"
+                      name="type"
+                      value="camera"
+                      className="ml-2"
+                      checked={formData.service.type.includes('camera')}
+                      onChange={() => handleInputChange('service', 'type', 'camera')}
+                    />
+                    <label htmlFor="type" className="ml-2">
+                      Kamera
+                    </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="checkbox"
+                      name="type"
+                      value="accessory"
+                      className="ml-2"
+                      checked={formData.service.type.includes('accessory')}
+                      onChange={() => handleInputChange('service', 'type', 'accessory')}
+                    />
+                    <label htmlFor="type" className="ml-2">
+                      Aksesori
+                    </label>
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="description">Deskripsi Servis</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="text"
+                      name="description"
+                      id="description"
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500"
+                      placeholder="Cth: Kedai Baiki Kami"
+                      value={formData.service.description}
+                      onChange={(e) => handleInputChange('service', 'description', e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="time">Masa Operasi</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input
+                      type="time"
+                      name="time"
+                      id="timeStart"
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500"
+                      value={formData.service.timeStart}
+                      onChange={(e) => handleInputChange('service', 'timeStart', e.target.value)}
+                      required
+                    />
+                    <input
+                      type="time"
+                      name="time"
+                      id="timeEnd"
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500"
+                      value={formData.service.timeEnd}
+                      onChange={(e) => handleInputChange('service', 'timeEnd', e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full items-center mt-2">
+                  <label htmlFor="picture1">Picture 1: </label>
+                  <input
+                    type="file"
+                    name="picture1"
+                    id="picture1"
+                    className="ml-2"
+                    accept="image/*"
+                    onChange={(e) => handleInputChange('service', 'picture1', e.target.files?.[0])}
+                  />
+                </div>
+                <div className="flex w-full items-center mt-2">
+                  <label htmlFor="picture2">Picture 2: </label>
+                  <input
+                    type="file"
+                    name="picture2"
+                    id="picture2"
+                    className="ml-2"
+                    accept="image/*"
+                    onChange={(e) => handleInputChange('service', 'picture2', e.target.files?.[0])}
+                  />
+                </div>
+                <div className="flex w-full items-center mt-2">
+                  <label htmlFor="picture3">Picture 3: </label>
+                  <input
+                    type="file"
+                    name="picture3"
+                    id="picture3"
+                    className="ml-2"
+                    accept="image/*"
+                    onChange={(e) => handleInputChange('service', 'picture3', e.target.files?.[0])}
+                  />
+                </div>
+                <div className="flex w-full items-center mt-2">
+                  <label htmlFor="picture4">Picture 4: </label>
+                  <input
+                    type="file"
+                    name="picture4"
+                    id="picture4"
+                    className="ml-2"
+                    accept="image/*"
+                    onChange={(e) => handleInputChange('service', 'picture4', e.target.files?.[0])}
+                  />
+                </div>
+              </>
+            )}
+            {activeTab === 'contactUs' && (
+              <>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="email">Emel</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="email" 
+                      name="email" 
+                      id="email" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: amanz@dev.my" 
+                      required 
+                      value={formData.contactUs.email} 
+                      onChange={(e) => handleInputChange('contactUs', 'email', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="contact">Nombor Telefon</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="tel" 
+                      name="contact" 
+                      id="contact" 
+                      className="rounded-xl w-full ml-2 required:border-red-500 required:border-2 valid:border-green-500" 
+                      placeholder="Cth: 0123456789" 
+                      required 
+                      value={formData.contactUs.contact} 
+                      onChange={(e) => handleInputChange('contactUs', 'contact', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="websiteUrl">Website</label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="websiteUrl" 
+                      id="websiteUrl" 
+                      className="rounded-xl w-full ml-2" 
+                      placeholder="Cth: https://amanz.my/" 
+                      value={formData.contactUs.websiteUrl} 
+                      onChange={(e) => handleInputChange('contactUs', 'websiteUrl', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-col px-4 mb-2">
+                    <label htmlFor="instagramUrl">Instagram: </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="instagramUrl" 
+                      id="instagramUrl" 
+                      className="rounded-xl w-full ml-2" 
+                      placeholder="Cth: https://www.instagram.com/amanz.my/" 
+                      value={formData.contactUs.instagramUrl} 
+                      onChange={(e) => handleInputChange('contactUs', 'instagramUrl', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="twitterUrl">Twitter: </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="twitterUrl" 
+                      id="twitterUrl" 
+                      className="rounded-xl w-full ml-2" 
+                      placeholder="Cth: https://twitter.com/amanz" 
+                      value={formData.contactUs.twitterUrl} 
+                      onChange={(e) => handleInputChange('contactUs', 'twitterUrl', e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full mt-2 flex-col">
+                  <div className="flex flex-row px-4 mb-2">
+                    <label htmlFor="facebookUrl">Facebook: </label>
+                  </div>
+                  <div className="flex flex-row">
+                    <input 
+                      type="text" 
+                      name="FacebookUrl" 
+                      id="FacebookUrl" 
+                      className="rounded-xl w-full ml-2" 
+                      placeholder="Cth: https://www.facebook.com/AmanzNetwork/" 
+                      value={formData.contactUs.FacebookUrl} 
+                      onChange={(e) => handleInputChange('contactUs', 'facebookUrl', e.target.value)}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
             <div className="flex md:inline-flex md:space-x-4 mt-2">
               <button className="inline-block rounded bg-red-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-blue-red focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-red-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" 
               onClick={handleSubmit}>
