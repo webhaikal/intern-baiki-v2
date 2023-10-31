@@ -476,7 +476,7 @@ export default function Home() {
             )}
             {activeTab === 'service' && (
               <>
-                <div className="flex w-full mt-2 flex-col">
+                <div className="flex w-full flex-col">
                   <div className="flex flex-row px-4 mb-2">
                     <label htmlFor="type">Kategori Gajet</label>
                   </div>
@@ -623,7 +623,7 @@ export default function Home() {
             )}
             {activeTab === 'contactUs' && (
               <>
-                <div className="flex w-full mt-2 flex-col">
+                <div className="flex w-full flex-col">
                   <div className="flex flex-row px-4 mb-2">
                     <label htmlFor="email">Emel</label>
                   </div>
