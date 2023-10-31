@@ -15,49 +15,6 @@ export default function Home() {
   const storage = getStorage();
 
   const handleSubmit = async () => {
-    const name = (document.getElementById("name") as HTMLInputElement)?.value || (document.getElementById("mobile_name") as HTMLInputElement)?.value;
-    const address = (document.getElementById("address") as HTMLInputElement)?.value || (document.getElementById("mobile_address") as HTMLInputElement)?.value;
-    const postcode = (document.getElementById("postcode") as HTMLInputElement)?.value || (document.getElementById("mobile_postcode") as HTMLInputElement)?.value;
-    const district = (document.getElementById("district") as HTMLInputElement)?.value || (document.getElementById("mobile_district") as HTMLInputElement)?.value;
-    const state = (document.getElementById("state") as HTMLInputElement)?.value || (document.getElementById("mobile_state") as HTMLInputElement)?.value;
-    const location = (document.getElementById("location") as HTMLInputElement)?.value || (document.getElementById("mobile_location") as HTMLInputElement)?.value;
-    const description = (document.getElementById("description") as HTMLInputElement)?.value || (document.getElementById("mobile_description") as HTMLInputElement)?.value;
-    const timeStart = (document.getElementById("timeStart") as HTMLInputElement)?.value || (document.getElementById("mobile_timeStart") as HTMLInputElement)?.value;
-    const timeEnd = (document.getElementById("timeEnd") as HTMLInputElement)?.value || (document.getElementById("mobile_timeEnd") as HTMLInputElement)?.value;
-    const contact = (document.getElementById("contact") as HTMLInputElement)?.value || (document.getElementById("mobile_contact") as HTMLInputElement)?.value;
-    const email = (document.getElementById("email") as HTMLInputElement)?.value || (document.getElementById("mobile_email") as HTMLInputElement)?.value;
-    const websiteUrl = (document.getElementById("websiteUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_websiteUrl") as HTMLInputElement)?.value;
-    const facebookUrl = (document.getElementById("FacebookUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_FacebookUrl") as HTMLInputElement)?.value;
-    const instagramUrl = (document.getElementById("instagramUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_instagramUrl") as HTMLInputElement)?.value;
-    const twitterUrl = (document.getElementById("twitterUrl") as HTMLInputElement)?.value || (document.getElementById("mobile_twitterUrl") as HTMLInputElement)?.value;
-
-    // Check if any of the required fields are empty
-    if (!name || !address || !postcode || !district || !state || !location || !description || !timeStart || !timeEnd || !contact || !email) {
-      // Display an error message to the user or prevent form submission
-      alert("Please fill out all required fields.");
-      return;
-    }
-
-    // Check if "contact" is a valid number (you can customize the validation)
-    if (!/^\d{10}$|^\d{11}$/.test(contact)) {
-      alert("Please enter a valid 10-digit or 11-digit contact number.");
-      return;
-    }
-
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    let isChecked = false;
-
-    checkboxes.forEach((checkbox) => {
-      if ((checkbox as HTMLInputElement).checked) {
-        isChecked = true;
-      }
-    });
-
-    if (!isChecked) {
-      alert("Please select at least one checkbox.");
-      return; // Do not proceed with form submission
-    }
-    
     // Initialize variables for picture URLs
     let picture1Url = "";
     let picture2Url = "";
@@ -65,57 +22,81 @@ export default function Home() {
     let picture4Url = "";
     
      // Function to upload picture to Firebase Storage and get its URL
-    const uploadPictureAndGetUrl = async (inputId: string, storagePath: string): Promise<string> => {
-      const input = document.getElementById(inputId) as HTMLInputElement | null;
-
-      if (input) {
-        const file = input.files?.[0];
-
-        if (file) {
+     const uploadPictureAndGetUrl = async (inputId: string, storagePath: string): Promise<string> => {
+      if (inputId === 'picture1' || inputId === 'picture2' || inputId === 'picture3' || inputId === 'picture4') {
+        const file = formData.service[inputId as keyof typeof formData.service];
+    
+        if (typeof file === 'string') {
+          // Handle the case where `file` is a string, perhaps a URL
+          return file;
+        } else if (file instanceof File) {
           const pictureRef = ref(storage, storagePath);
-
-          try {
-            await uploadBytes(pictureRef, file);
-            return await getDownloadURL(pictureRef);
-          } catch (error) {
-            console.error("Error uploading picture:", error);
-            return "";
-          }
+          const reader = new FileReader();
+    
+          return new Promise<string>((resolve, reject) => {
+            reader.onload = async (event) => {
+              try {
+                if (event.target && event.target.result) {
+                  const arrayBuffer = event.target.result as ArrayBuffer;
+                  const uint8Array = new Uint8Array(arrayBuffer);
+                  const blob = new Blob([uint8Array], { type: file.type });
+    
+                  await uploadBytes(pictureRef, blob);
+                  const downloadURL = await getDownloadURL(pictureRef);
+                  resolve(downloadURL);
+                } else {
+                  console.error("Failed to read the file.");
+                  reject("Failed to read the file.");
+                }
+              } catch (error) {
+                console.error("Error uploading picture:", error);
+                reject(error);
+              }
+            };
+    
+            reader.onerror = (error) => {
+              console.error("Error reading file:", error);
+              reject(error);
+            };
+    
+            reader.readAsArrayBuffer(file);
+          });
         } else {
           console.error(`No file selected for ${inputId}`);
+          return "";
         }
       } else {
-        console.error(`Element with ID '${inputId}' not found in the DOM`);
+        console.error(`Invalid inputId '${inputId}'`);
+        return "";
       }
-
-      return "";
     };
+    
 
     // Upload pictures and get their URLs
-    picture1Url = await uploadPictureAndGetUrl("picture1", `images/${name}/picture1.jpg`);
-    picture2Url = await uploadPictureAndGetUrl("picture2", `images/${name}/picture2.jpg`);
-    picture3Url = await uploadPictureAndGetUrl("picture3", `images/${name}/picture3.jpg`);
-    picture4Url = await uploadPictureAndGetUrl("picture4", `images/${name}/picture4.jpg`);
+    picture1Url = await uploadPictureAndGetUrl("picture1", `images/${formData.companyInformation.name}/picture1.jpg`);
+    picture2Url = await uploadPictureAndGetUrl("picture2", `images/${formData.companyInformation.name}/picture2.jpg`);
+    picture3Url = await uploadPictureAndGetUrl("picture3", `images/${formData.companyInformation.name}/picture3.jpg`);
+    picture4Url = await uploadPictureAndGetUrl("picture4", `images/${formData.companyInformation.name}/picture4.jpg`);
 
     // Handle checkboxes and create an array of selected types
     const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map((checkbox) => (checkbox as HTMLInputElement).value);
     
     const dataToSubmit = {
-      name,
-      address,
-      postcode,
-      district,
-      state,
-      location,
-      description,
-      type: selectedTypes, // Store selected types as an array
-      time: `${timeStart} - ${timeEnd}`,
-      contact,
-      email,
-      websiteUrl,
-      facebookUrl,
-      instagramUrl,
-      twitterUrl,
+      name: formData.companyInformation.name,
+      address: formData.companyInformation.address,
+      postcode: formData.companyInformation.postcode,
+      district: formData.companyInformation.district,
+      state: formData.companyInformation.state,
+      location: formData.companyInformation.location,
+      type: formData.service.type,
+      description: formData.service.description,
+      time: `${formData.service.timeStart} - ${formData.service.timeEnd}`,
+      contact: formData.contactUs.contact,
+      email: formData.contactUs.email,
+      websiteUrl: formData.contactUs.websiteUrl,
+      facebookUrl: formData.contactUs.facebookUrl,
+      instagramUrl: formData.contactUs.instagramUrl,
+      twitterUrl: formData.contactUs.twitterUrl,
       picture1: picture1Url,
       picture2: picture2Url,
       picture3: picture3Url,
@@ -154,7 +135,7 @@ export default function Home() {
       websiteUrl: string;
       instagramUrl: string;
       twitterUrl: string;
-      FacebookUrl: string;
+      facebookUrl: string;
     };
   };
 
@@ -173,10 +154,10 @@ export default function Home() {
       description: '',
       timeStart: '',
       timeEnd: '',
-      picture1: null,
-      picture2: null,
-      picture3: null,
-      picture4: null,
+      picture1: '',
+      picture2: '',
+      picture3: '',
+      picture4: '',
     },
     contactUs: {
       email: '',
@@ -184,12 +165,23 @@ export default function Home() {
       websiteUrl: '',
       instagramUrl: '',
       twitterUrl: '',
-      FacebookUrl: '',
+      facebookUrl: '',
     },
   });
 
   const handleInputChange = (tab: keyof FormData, field: string, value: any) => {
     setFormData((prevData) => {
+      if (tab === 'service' && (field === 'picture1' || field === 'picture2' || field === 'picture3' || field === 'picture4')) {
+        // For picture inputs in the 'service' section
+        return {
+          ...prevData,
+          service: {
+            ...prevData.service,
+            [field]: value,
+          },
+        };
+      }
+  
       if (tab === 'service' && field === 'type') {
         // For checkbox inputs in the 'service' section
         const updatedType = prevData.service.type.includes(value)
@@ -213,7 +205,8 @@ export default function Home() {
         },
       };
     });
-  }; 
+  };
+  
   
   // Function to switch tabs
   const switchTab = (tabName: string) => {
@@ -712,11 +705,11 @@ export default function Home() {
                   <div className="flex flex-row">
                     <input 
                       type="text" 
-                      name="FacebookUrl" 
-                      id="FacebookUrl" 
+                      name="facebookUrl" 
+                      id="facebookUrl" 
                       className="rounded-xl w-full ml-2" 
                       placeholder="Cth: https://www.facebook.com/AmanzNetwork/" 
-                      value={formData.contactUs.FacebookUrl} 
+                      value={formData.contactUs.facebookUrl} 
                       onChange={(e) => handleInputChange('contactUs', 'facebookUrl', e.target.value)}
                     />
                   </div>
@@ -805,7 +798,7 @@ export default function Home() {
           </div>
           <div className="flex w-full items-center mt-2">
             <label htmlFor="facebookUrl">Facebook: </label>
-            <input type="text" name="FacebookUrl" id="mobile_FacebookUrl" className="rounded-xl w-full ml-2">
+            <input type="text" name="facebookUrl" id="mobile_facebookUrl" className="rounded-xl w-full ml-2">
             </input>
           </div>
           <div className="flex w-full items-center mt-2">
